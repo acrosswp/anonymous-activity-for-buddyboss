@@ -98,7 +98,7 @@ class Post_Anonymously_For_BuddyBoss_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_URL . 'assets/dist/js/frontend-script.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_URL . 'assets/dist/js/frontend-script.js', array( 'jquery', 'bp-nouveau-activity-post-form' ), $this->version, true );
 
 	}
 
