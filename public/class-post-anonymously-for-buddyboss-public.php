@@ -57,6 +57,136 @@ class Post_Anonymously_For_BuddyBoss_Public {
 	}
 
 	/**
+	 * Register the hooks that are going to load into the bp_init
+	 *
+	 * @since    1.0.0
+	 */
+	public function bp_init() {
+
+		/**
+		 * Add post meta into the Group Meta
+		 */
+		add_action( 'bp_groups_posted_update', array( $this, 'groups_posted_update' ), 1000, 4 );
+
+		/**
+		 * Add post meta into the Activity Meta
+		 */
+		add_action( 'bp_activity_posted_update', array( $this, 'activity_posted_update' ), 1000, 3 );
+
+
+		/**
+		 * Hook to add filter so that the normal user can not see the Post author data
+		 */
+		add_action( 'bp_before_activity_entry', array( $this, 'before_activity_entry' ), 1000 );
+
+
+		/**
+		 * Hook to add filter so that the normal user can not see the Post author data
+		 */
+		add_action( 'bp_after_activity_entry', array( $this, 'after_activity_entry' ), 1000 );
+	}
+
+	/**
+	 * Register the hooks on activity/group post area
+	 *
+	 * @since    1.0.0
+	 */
+	public function before_activity_entry() {
+
+		$anonymously_post = bp_activity_get_meta( bp_get_activity_id(), 'anonymously-post', true );
+
+		if( ! empty( $anonymously_post ) ) {
+
+			/**
+			 * For User Link on the Avatar
+			 */
+			add_filter( 'bp_get_activity_user_link', array( $this, 'activity_user_link' ), 1000 );
+
+			/**
+			 * For User Avatar
+			 */
+			add_filter( 'bp_get_activity_avatar', array( $this, 'activity_avatar' ), 1000 );
+
+			echo "Test 1";
+			/**
+			 * For user link and the username in the Activity  after avatar
+			 */
+			add_filter( 'bp_core_get_userlink', array( $this, 'activity_userlink' ), 1000, 2 );
+		}
+	}
+
+	/**
+	 * Register the hooks on activity/group post area
+	 *
+	 * @since    1.0.0
+	 */
+	public function after_activity_entry() {
+
+		echo "Test 2";
+
+		remove_filter( 'bp_get_activity_user_link', array( $this, 'activity_user_link' ), 1000 );
+
+		remove_filter( 'bp_get_activity_avatar', array( $this, 'activity_avatar' ), 1000 );
+
+		remove_filter( 'bp_core_get_userlink', array( $this, 'activity_userlink' ), 1000 );
+	}
+
+	/**
+	 * Register the hooks on group post update
+	 *
+	 * @since    1.0.0
+	 */
+	public function activity_posted_update( $content, $user_id, $activity_id ) {
+
+		if( ! empty( $_REQUEST['anonymously-post'] ) ) {
+			bp_activity_update_meta( $activity_id, 'anonymously-post', 1 );
+		}
+
+	}
+
+	/**
+	 * Register the hooks on group post update
+	 *
+	 * @since    1.0.0
+	 */
+	public function groups_posted_update( $content, $user_id, $group_id, $activity_id ) {
+
+		if( ! empty( $_REQUEST['anonymously-post'] ) ) {
+			bp_activity_update_meta( $activity_id, 'anonymously-post', 1 );
+		}
+
+	}
+
+	/**
+	 * Remove the User Profile Link
+	 */
+	public function activity_user_link( $link ) {
+		return '';
+	}
+
+	/**
+	 * Remove the User Profile Link
+	 */
+	public function activity_avatar( $link ) {
+		$defaults = array(
+			'alt'     => $alt_default,
+			'class'   => 'avatar',
+			'email'   => false,
+			'type'    => $type_default,
+			'user_id' => false,
+		);
+
+		return bp_core_fetch_avatar( $defaults );
+	}
+
+	/**
+	 * Remove the User Profile Link
+	 */
+	public function activity_userlink( $link, $user_id ) {
+		return __( 'Anonymous member', 'post-anonymously-for-buddyboss' );
+	}
+
+	/**
 	 * Register the stylesheets for the public-facing side of the site.
 	 *
 	 * @since    1.0.0
@@ -98,7 +228,7 @@ class Post_Anonymously_For_BuddyBoss_Public {
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_URL . 'assets/dist/js/frontend-script.js', array( 'jquery', 'bp-nouveau-activity-post-form' ), $this->version, true );
+		wp_enqueue_script( $this->plugin_name, POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_URL . 'assets/dist/js/frontend-script.js', array( 'bp-nouveau-activity-post-form' ), $this->version, true );
 
 	}
 
