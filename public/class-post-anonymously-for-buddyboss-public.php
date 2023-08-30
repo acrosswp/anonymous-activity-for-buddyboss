@@ -64,7 +64,7 @@ class Post_Anonymously_For_BuddyBoss_Public {
 	public function bp_init() {
 
 		/**
-		 * Add post meta into the Group Meta
+		 * Add post meta into the Group Activity Meta
 		 */
 		add_action( 'bp_groups_posted_update', array( $this, 'groups_posted_update' ), 1000, 4 );
 
@@ -72,6 +72,7 @@ class Post_Anonymously_For_BuddyBoss_Public {
 		 * Add post meta into the Activity Meta
 		 */
 		add_action( 'bp_activity_posted_update', array( $this, 'activity_posted_update' ), 1000, 3 );
+
 
 
 		/**
@@ -84,6 +85,110 @@ class Post_Anonymously_For_BuddyBoss_Public {
 		 * Hook to add filter so that the normal user can not see the Post author data
 		 */
 		add_action( 'bp_after_activity_entry', array( $this, 'after_activity_entry' ), 1000 );
+
+
+
+		/**
+		 * Hook to add filter so that the normal user can not see the Post author data
+		 */
+		add_filter( 'bp_groups_format_activity_action_activity_update', array( $this, 'group_activity_update' ), 1000, 2 );
+		
+	}
+
+
+	/**
+	 * Check where the activity post author is the login user 
+	 */
+	function login_user_is_activity_author( $activity_user_id ) {
+
+		$value = false;
+
+		$user_id = get_current_user_id();
+
+		if( ! empty( $user_id ) && $activity_user_id == $user_id ) {
+			$value = true;
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Check where the login user is the group moderator
+	 */
+	function is_group_mods( $activity_user_id, $group_id ) {
+
+		$value = false;
+
+		$user_id = get_current_user_id();
+		$group_mods = groups_get_group_mods( $group_id );
+
+		if( ! empty( $user_id ) && in_array( $user_id, $group_mods ) ) {
+			$value = true;
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Check where the login user is the group admins
+	 */
+	function is_group_admins( $activity_user_id, $group_id ) {
+
+		$value = false;
+
+		$user_id = get_current_user_id();
+		$group_admins = groups_get_group_admins( $group_id );
+
+		if( ! empty( $user_id ) && in_array( $user_id, $group_admins ) ) {
+			$value = true;
+		}
+
+		return $value;
+	}
+
+	/**
+	 * Check if the activity is the anonymously activity
+	 */
+	function is_anonymously_activity( $activity_id, $activity_user_id ) {
+
+		$value = false;
+		$user_id = get_current_user_id();
+
+		if( ! empty( bp_activity_get_meta( $activity_id, 'anonymously-post', true ) ) ) {
+			$value = true;
+		}
+
+		return $value;
+	}
+
+
+	function group_activity_update( $action, $activity ) {
+
+		/**
+		 * Check if the activity is anonymously or not
+		 */
+		if( 
+			! empty( $activity->id ) 
+			&& ! empty( $activity->user_id ) 
+			&& $this->is_anonymously_activity( $activity->id, $activity->user_id ) 
+		) {
+			$user_link = $this->anonymous_user_label();
+			if( 
+				$this->login_user_is_activity_author( $activity->user_id )
+				|| $this->is_group_mods( $activity->user_id, $activity->item_id )
+				|| $this->is_group_admins( $activity->user_id, $activity->item_id )
+			) {
+				$user_link = bp_core_get_userlink( $activity->user_id );
+				$user_link .= $this->anonymous_author_user_label();
+			}
+
+			$group      = groups_get_group( $activity->item_id );
+			$group_link = '<a href="' . esc_url( bp_get_group_permalink( $group ) ) . '">' . bp_get_group_name( $group ) . '</a>';
+
+			$action = sprintf( __( '%1$s posted an update in the group %2$s', 'post-anonymously-for-buddyboss' ), $user_link, $group_link );
+		}
+
+		return $action;
 	}
 
 	/**
@@ -92,25 +197,25 @@ class Post_Anonymously_For_BuddyBoss_Public {
 	 * @since    1.0.0
 	 */
 	public function before_activity_entry() {
-
-		$anonymously_post = bp_activity_get_meta( bp_get_activity_id(), 'anonymously-post', true );
-
-		if( ! empty( $anonymously_post ) ) {
+		
+		/**
+		 * Check if the activity is anonymously or not
+		 */
+		if( $this->is_anonymously_activity( bp_get_activity_id(), bp_get_activity_user_id() ) ) {
 
 			/**
 			 * For User Link on the Avatar
 			 */
 			add_filter( 'bp_get_activity_user_link', array( $this, 'activity_user_link' ), 1000 );
 
-			/**
-			 * For User Avatar
-			 */
+			// /**
+			//  * For User Avatar
+			//  */
 			add_filter( 'bp_get_activity_avatar', array( $this, 'activity_avatar' ), 1000 );
 
-			echo "Test 1";
-			/**
-			 * For user link and the username in the Activity  after avatar
-			 */
+			// /**
+			//  * For user link and the username in the Activity  after avatar
+			//  */
 			add_filter( 'bp_core_get_userlink', array( $this, 'activity_userlink' ), 1000, 2 );
 		}
 	}
@@ -121,8 +226,6 @@ class Post_Anonymously_For_BuddyBoss_Public {
 	 * @since    1.0.0
 	 */
 	public function after_activity_entry() {
-
-		echo "Test 2";
 
 		remove_filter( 'bp_get_activity_user_link', array( $this, 'activity_user_link' ), 1000 );
 
@@ -183,7 +286,21 @@ class Post_Anonymously_For_BuddyBoss_Public {
 	 * Remove the User Profile Link
 	 */
 	public function activity_userlink( $link, $user_id ) {
+		return $this->anonymous_user_label();
+	}
+
+	/**
+	 * Remove the User Profile Link
+	 */
+	public function anonymous_user_label() {
 		return __( 'Anonymous member', 'post-anonymously-for-buddyboss' );
+	}
+
+	/**
+	 * Remove the User Profile Link
+	 */
+	public function anonymous_author_user_label() {
+		return __( ' ( Anonymous Post )', 'post-anonymously-for-buddyboss' );
 	}
 
 	/**
