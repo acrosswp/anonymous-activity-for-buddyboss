@@ -53,7 +53,37 @@ class Post_Anonymously_For_BuddyBoss_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+	}
 
+	/**
+	 * Use to load all the class and files
+	 */
+	public function load_class() {
+		/**
+		 * The class responsible for defining all functions that can be use
+		 * side of the site.
+		 */
+		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'public/partials/post-anonymously-for-buddyboss-public-common.php';
+
+		/**
+		 * The class responsible for defining all actions that occur in the public-facing save group and activity meta
+		 * side of the site.
+		 */
+		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'public/partials/post-anonymously-for-buddyboss-public-save-meta.php';
+
+
+		/**
+		 * The class responsible for defining all actions that occur in the public-facing for rendering activity
+		 * side of the site.
+		 */
+		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'public/partials/post-anonymously-for-buddyboss-public-render-activity.php';
+
+
+		/**
+		 * The class responsible for defining all actions that occur in the public-facing for rendering notifications
+		 * side of the site.
+		 */
+		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'public/partials/post-anonymously-for-buddyboss-public-render-notifications.php';
 	}
 
 	/**
@@ -64,401 +94,18 @@ class Post_Anonymously_For_BuddyBoss_Public {
 	public function bp_init() {
 
 		/**
-		 * Save the meta into the meta table
+		 * Load all the files first
 		 */
-		$this->save_meta();
+		$this->load_class();
 
-		/**
-		 * Render the activity post
-		 */
-		$this->render_activity();
+		Post_Anonymously_For_BuddyBoss_Public_Save_Meta::instance()->hooks();
 
-		/**
-		 * Render the notifications
-		 */
-		$this->render_notifications();
+
+		Post_Anonymously_For_BuddyBoss_Public_Render_Activity::instance()->hooks();
+
+
+		Post_Anonymously_For_BuddyBoss_Public_Render_Notifications::instance()->hooks();
 		
-	}
-
-	/**
-	 * Contain all the function are use to save the meta
-	 */
-	public function save_meta() {
-
-		/**
-		 * Add post meta into the Group Activity Meta
-		 */
-		add_action( 'bp_groups_posted_update', array( $this, 'groups_posted_update' ), 1000, 4 );
-
-		/**
-		 * Add post meta into the Activity Meta
-		 */
-		add_action( 'bp_activity_posted_update', array( $this, 'activity_posted_update' ), 1000, 3 );
-	}
-
-	/**
-	 * Contain all the function are use to render activity
-	 */
-	public function render_activity() {
-
-		/**
-		 * Hook to add filter so that the normal user can not see the Post author data
-		 */
-		add_action( 'bp_before_activity_entry', array( $this, 'before_activity_entry' ), 1000 );
-
-
-		/**
-		 * Hook to add filter so that the normal user can not see the Post author data
-		 */
-		add_action( 'bp_after_activity_entry', array( $this, 'after_activity_entry' ), 1000 );
-
-		/**
-		 * Hook to add filter so that the normal user can not see the Post author data
-		 */
-		add_filter( 'bp_groups_format_activity_action_activity_update', array( $this, 'group_activity_update' ), 1000, 2 );
-	}
-
-	/**
-	 * Contain all the function are use to render activity
-	 */
-	public function render_notifications() {
-
-		/**
-		 * Hook to hide the author name in the notifications
-		 */
-		add_filter( 'bb_groups_single_bb_groups_subscribed_activity_notification', array( $this, 'group_activity_notification' ), 1000, 5 );
-
-
-		add_action( 'notifications_loop_start', array( $this, 'notifications_loop_start' ) );
-
-
-		add_action( 'notifications_loop_end', array( $this, 'notifications_loop_end' ) );
-
-	}
-
-	/**
-	 * Nofitication loop started
-	 */
-	public function notifications_loop_start() {
-
-		/**
-		 * Remove the link from the User notification
-		 * Used for: BuddyBoss Theme Only
-		 */
-		add_filter( 'bp_core_get_user_domain', array( $this, 'notifications_user_domain' ), 100, 4 );
-
-
-		/**
-		 * Remove the img from the User notification
-		 * Used for: BuddyBoss Theme Only
-		 */
-		add_filter( 'bp_core_fetch_avatar_url_check', array( $this, 'notifications_user_avatar_url' ), 100, 2 );
-	}
-
-	/**
-	 * Nofitication loop end
-	 */
-	public function notifications_loop_end() {
-
-		/**
-		 * Remove the link from the User notification
-		 * Used for: BuddyBoss Theme Only
-		 */
-		remove_filter( 'bp_core_get_user_domain', array( $this, 'notifications_user_domain' ), 100 );
-
-
-		/**
-		 * Remove the img from the User notification
-		 * Used for: BuddyBoss Theme Only
-		 */
-		remove_filter( 'bp_core_fetch_avatar_url_check', array( $this, 'notifications_user_avatar_url' ), 100 );
-	}
-
-	/**
-	 * Check if the current notification is the anonymously or not
-	 */
-	public function is_anonymously_notifications( $user_id ) {
-
-		$value =  false;
-
-		$notification     	= buddypress()->notifications->query_loop->notification;
-
-		if( ! empty( $notification ) ) {
-			$component        	= $notification->component_name;
-			$component_action	= $notification->component_action;
-			$activity_user_id 	= $notification->secondary_item_id;
-			
-			if( 
-				$user_id == $activity_user_id 
-				&& 'groups' == $component 
-				&& 'bb_groups_subscribed_activity' == $component_action 
-			) {
-				$activity_id 		= $notification->item_id;
-				if( $this->is_anonymously_activity( $activity_id ) ) {
-					$value =  true;
-				}
-			}
-		}
-
-		return $value;
-	}
-
-	/**
-	 * Change the link into the notification area
-	 */
-	public function notifications_user_domain( $domain, $user_id, $user_nicename, $user_login ) {
-
-		if( $this->is_anonymously_notifications( $user_id ) ) {
-			$domain = '';
-		}
-
-		return $domain;
-	}
-
-	/**
-	 * Change the link into the notification area
-	 */
-	public function notifications_user_avatar_url( $avatar_url, $params ) {
-
-		if( ! empty( $params['item_id'] ) && $this->is_anonymously_notifications( $params['item_id'] ) ) {
-			$avatar_url = '';
-		}
-
-		return $avatar_url;
-	}
-
-	/**
-	 * Check where the activity post author is the login user 
-	 */
-	function login_user_is_activity_author( $activity_user_id ) {
-
-		$value = false;
-
-		$user_id = get_current_user_id();
-
-		if( ! empty( $user_id ) && $activity_user_id == $user_id ) {
-			$value = true;
-		}
-
-		return $value;
-	}
-
-	/**
-	 * Check where the login user is the group moderator
-	 */
-	function is_group_mods( $activity_user_id, $group_id ) {
-
-		$value = false;
-
-		$user_id = get_current_user_id();
-		$group_mods = groups_get_group_mods( $group_id );
-
-		if( ! empty( $user_id ) && in_array( $user_id, $group_mods ) ) {
-			$value = true;
-		}
-
-		return $value;
-	}
-
-	/**
-	 * Check where the login user is the group admins
-	 */
-	function is_group_admins( $activity_user_id, $group_id ) {
-
-		$value = false;
-
-		$user_id = get_current_user_id();
-		$group_admins = groups_get_group_admins( $group_id );
-
-		if( ! empty( $user_id ) && in_array( $user_id, $group_admins ) ) {
-			$value = true;
-		}
-
-		return $value;
-	}
-
-	/**
-	 * Check if the activity is the anonymously activity
-	 */
-	function is_anonymously_activity( $activity_id ) {
-
-		$value = false;
-		$user_id = get_current_user_id();
-
-		if( ! empty( bp_activity_get_meta( $activity_id, 'anonymously-post', true ) ) ) {
-			$value = true;
-		}
-
-		return $value;
-	}
-
-	/**
-	 * Update the activity notification
-	 */
-	function group_activity_notification( $content, $notification, $notification_link, $text, $screen ) {
-
-		/**
-		 * If this is for notifications only
-		 */
-		if( in_array( $screen, array( 'web', 'web_push' ) ) ) {
-			$activity_id = $notification->item_id;
-
-			/**
-			 * Check if the post is a anonymously or not
-			 */
-			if( $this->is_anonymously_activity( $activity_id ) ) {
-
-				$user_fullname = bp_core_get_user_displayname( $notification->secondary_item_id );
-
-				$content['text'] = str_replace( $user_fullname, $this->anonymous_user_label(), $content['text'] );
-			}
-		}
-
-		return $content;
-	}
-
-	/**
-	 * Update the activity header seaction
-	 */
-	function group_activity_update( $action, $activity ) {
-
-		/**
-		 * Check if the activity is anonymously or not
-		 */
-		if( 
-			! empty( $activity->id ) 
-			&& ! empty( $activity->user_id ) 
-			&& $this->is_anonymously_activity( $activity->id ) 
-		) {
-			$user_link = $this->anonymous_user_label();
-			if( 
-				$this->login_user_is_activity_author( $activity->user_id )
-				|| $this->is_group_mods( $activity->user_id, $activity->item_id )
-				|| $this->is_group_admins( $activity->user_id, $activity->item_id )
-			) {
-				$user_link = bp_core_get_userlink( $activity->user_id );
-				$user_link .= $this->anonymous_author_user_label();
-			}
-
-			$group      = groups_get_group( $activity->item_id );
-			$group_link = '<a href="' . esc_url( bp_get_group_permalink( $group ) ) . '">' . bp_get_group_name( $group ) . '</a>';
-
-			$action = sprintf( __( '%1$s posted an update in the group %2$s', 'post-anonymously-for-buddyboss' ), $user_link, $group_link );
-		}
-
-		return $action;
-	}
-
-	/**
-	 * Register the hooks on activity/group post area
-	 *
-	 * @since    1.0.0
-	 */
-	public function before_activity_entry() {
-		
-		/**
-		 * Check if the activity is anonymously or not
-		 */
-		if( $this->is_anonymously_activity( bp_get_activity_id() ) ) {
-
-			/**
-			 * For User Link on the Avatar
-			 */
-			add_filter( 'bp_get_activity_user_link', array( $this, 'activity_user_link' ), 1000 );
-
-			// /**
-			//  * For User Avatar
-			//  */
-			add_filter( 'bp_get_activity_avatar', array( $this, 'activity_avatar' ), 1000 );
-
-			// /**
-			//  * For user link and the username in the Activity  after avatar
-			//  */
-			add_filter( 'bp_core_get_userlink', array( $this, 'activity_userlink' ), 1000, 2 );
-		}
-	}
-
-	/**
-	 * Register the hooks on activity/group post area
-	 *
-	 * @since    1.0.0
-	 */
-	public function after_activity_entry() {
-
-		remove_filter( 'bp_get_activity_user_link', array( $this, 'activity_user_link' ), 1000 );
-
-		remove_filter( 'bp_get_activity_avatar', array( $this, 'activity_avatar' ), 1000 );
-
-		remove_filter( 'bp_core_get_userlink', array( $this, 'activity_userlink' ), 1000 );
-	}
-
-	/**
-	 * Register the hooks on group post update
-	 *
-	 * @since    1.0.0
-	 */
-	public function activity_posted_update( $content, $user_id, $activity_id ) {
-
-		if( ! empty( $_REQUEST['anonymously-post'] ) ) {
-			bp_activity_update_meta( $activity_id, 'anonymously-post', 1 );
-		}
-
-	}
-
-	/**
-	 * Register the hooks on group post update
-	 *
-	 * @since    1.0.0
-	 */
-	public function groups_posted_update( $content, $user_id, $group_id, $activity_id ) {
-
-		if( ! empty( $_REQUEST['anonymously-post'] ) ) {
-			bp_activity_update_meta( $activity_id, 'anonymously-post', 1 );
-		}
-
-	}
-
-	/**
-	 * Remove the User Profile Link
-	 */
-	public function activity_user_link( $link ) {
-		return '';
-	}
-
-	/**
-	 * Remove the User Profile Link
-	 */
-	public function activity_avatar( $link ) {
-		$defaults = array(
-			'alt'     => $alt_default,
-			'class'   => 'avatar',
-			'email'   => false,
-			'type'    => $type_default,
-			'user_id' => false,
-		);
-
-		return bp_core_fetch_avatar( $defaults );
-	}
-
-	/**
-	 * Remove the User Profile Link
-	 */
-	public function activity_userlink( $link, $user_id ) {
-		return $this->anonymous_user_label();
-	}
-
-	/**
-	 * Remove the User Profile Link
-	 */
-	public function anonymous_user_label() {
-		return __( 'Anonymous Member', 'post-anonymously-for-buddyboss' );
-	}
-
-	/**
-	 * Remove the User Profile Link
-	 */
-	public function anonymous_author_user_label() {
-		return __( ' ( Anonymous Post )', 'post-anonymously-for-buddyboss' );
 	}
 
 	/**
