@@ -151,10 +151,10 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Activity {
 	 */
 	public function activity_avatar( $link ) {
 		$defaults = array(
-			'alt'     => $alt_default,
+			'alt'     => '',
 			'class'   => 'avatar',
 			'email'   => false,
-			'type'    => $type_default,
+			'type'    => '',
 			'user_id' => false,
 		);
 

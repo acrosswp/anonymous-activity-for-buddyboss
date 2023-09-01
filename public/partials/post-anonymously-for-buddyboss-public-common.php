@@ -109,8 +109,9 @@ class Post_Anonymously_For_BuddyBoss_Public_Common {
 
 		$user_id = get_current_user_id();
 		$group_mods = groups_get_group_mods( $group_id );
+		$group_mods = wp_list_pluck( $group_mods, 'user_id' );
 
-		if( ! empty( $user_id ) && in_array( $user_id, $group_mods ) ) {
+		if( ! empty( $user_id ) && ! empty( $group_mods ) && in_array( $user_id, $group_mods ) ) {
 			$value = true;
 		}
 
@@ -126,8 +127,9 @@ class Post_Anonymously_For_BuddyBoss_Public_Common {
 
 		$user_id = get_current_user_id();
 		$group_admins = groups_get_group_admins( $group_id );
+		$group_admins = wp_list_pluck( $group_admins, 'user_id' );
 
-		if( ! empty( $user_id ) && in_array( $user_id, $group_admins ) ) {
+		if( ! empty( $user_id ) && ! empty( $group_admins ) && in_array( $user_id, $group_admins ) ) {
 			$value = true;
 		}
 
