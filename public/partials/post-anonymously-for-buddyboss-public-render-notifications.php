@@ -80,11 +80,15 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Notifications {
 	public function hooks() {
 
 		/**
-		 * Hook to hide the author name in the notifications
+		 * Hook to hide the author name in the notifications for activity
 		 */
 		add_filter( 'bb_groups_single_bb_groups_subscribed_activity_notification', array( $this, 'group_activity_notification' ), 1000, 5 );
 
-		add_filter( 'bb_groups_single_bb_activity_comment_notification', array( $this, 'group_activity_notification' ), 1000, 5 );
+		/**
+		 * Hook to hide the author name in the notifications for activity comment
+		 */
+		add_filter( 'bp_activity_bb_activity_comment_notification', array( $this, 'activity_comment_notification' ), 1000, 7 );
+
 
 		add_action( 'notifications_loop_start', array( $this, 'notifications_loop_start' ) );
 
@@ -101,16 +105,48 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Notifications {
 		 * If this is for notifications only
 		 */
 		if( in_array( $screen, array( 'web', 'web_push' ) ) ) {
-			$activity_id = $notification->item_id;
+			$activity_id 		= $notification->item_id;
+			$activity_user_id 	= $notification->secondary_item_id;
+			$group_id 			= bp_activity_get_meta( $activity_id, 'anonymously-post-group-id' );
 
 			/**
 			 * Check if the post is a anonymously or not
 			 */
-			if( $this->_functions->is_anonymously_activity( $activity_id ) ) {
+			if ( $this->_functions->show_anonymously_users( $activity_user_id, $group_id ) ) {
+				
+				$user_fullname = bp_core_get_user_displayname( $notification->secondary_item_id );
+
+				$content['text'] = str_replace( $user_fullname, $user_fullname . ' ' .$this->_functions->anonymous_author_user_commnet_label(), $content['text'] );
+
+			} elseif( $this->_functions->is_anonymously_activity( $activity_id ) ) {
 
 				$user_fullname = bp_core_get_user_displayname( $notification->secondary_item_id );
 
 				$content['text'] = str_replace( $user_fullname, $this->_functions->anonymous_user_label(), $content['text'] );
+			}
+		}
+
+		return $content;
+	}
+
+	/**
+	 * Update the activity notification
+	 */
+	function activity_comment_notification( $content, $item_id, $secondary_item_id, $total_items, $format, $notification_id, $screen ) {
+
+		/**
+		 * If this is for notifications only
+		 */
+		if( in_array( $screen, array( 'web', 'web_push' ) ) ) {
+
+			/**
+			 * Check if the post is a anonymously or not
+			 */
+			if( $this->_functions->is_anonymously_activity( $item_id ) ) {
+
+				$user_fullname = bp_core_get_user_displayname( $secondary_item_id );
+
+				$content = str_replace( $user_fullname, $this->_functions->anonymous_user_label(), $content );
 			}
 		}
 
@@ -198,15 +234,25 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Notifications {
 			$activity_user_id 	= $notification->secondary_item_id;
 			
 			if( 
-				$user_id == $activity_user_id 
-				|| ( 'groups' == $component && 'bb_groups_subscribed_activity' == $component_action )
+				( 'groups' == $component && 'bb_groups_subscribed_activity' == $component_action )
 				|| ( 'activity' == $component && 'bb_activity_comment' == $component_action )
 			) {
 
+				/**
+				 * For Normal Activity notification
+				 */
 				$activity_id 		= $notification->item_id;
+				$activity_user_id 	= $notification->secondary_item_id;
+				$group_id 			= bp_activity_get_meta( $activity_id, 'anonymously-post-group-id' );
 
-				if( $this->_functions->is_anonymously_activity( $activity_id ) ) {
-					$value =  true;
+				if( 
+					$activity_user_id 
+					&& $group_id 
+					&& empty( $this->_functions->show_anonymously_users( $activity_user_id, $group_id ) )
+				) {
+					if( $this->_functions->is_anonymously_activity( $activity_id ) ) {
+						$value =  true;
+					}
 				}
 			}
 		}

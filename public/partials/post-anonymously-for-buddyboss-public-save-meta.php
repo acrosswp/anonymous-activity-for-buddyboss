@@ -110,7 +110,12 @@ class Post_Anonymously_For_BuddyBoss_Public_Save_Meta {
 			&& $this->_functions->is_anonymously_activity( $activity->id ) 
 			&& $this->_functions->login_user_is_activity_author( $activity->user_id )
 		) {
+			/**
+			 * Save this in the meta
+			 */
 			bp_activity_update_meta( $comment_id, 'anonymously-post', 1 );
+			bp_activity_update_meta( $comment_id, 'anonymously-post-activity-id', $activity->id );
+			bp_activity_update_meta( $comment_id, 'anonymously-post-group-id', $activity->item_id );
 		}
 	}
 
@@ -123,6 +128,11 @@ class Post_Anonymously_For_BuddyBoss_Public_Save_Meta {
 
 		if( ! empty( $_REQUEST['anonymously-post'] ) ) {
 			bp_activity_update_meta( $activity_id, 'anonymously-post', 1 );
+
+			/**
+			 * Working
+			 */
+			bp_activity_update_meta( $activity_id, 'anonymously-post-group-id', $activity->item_id );
 		}
 
 	}
@@ -136,6 +146,7 @@ class Post_Anonymously_For_BuddyBoss_Public_Save_Meta {
 
 		if( ! empty( $_REQUEST['anonymously-post'] ) ) {
 			bp_activity_update_meta( $activity_id, 'anonymously-post', 1 );
+			bp_activity_update_meta( $activity_id, 'anonymously-post-group-id', $group_id );
 		}
 
 	}
