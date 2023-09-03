@@ -26,12 +26,12 @@ defined( 'ABSPATH' ) || exit;
  * @subpackage Post_Anonymously_For_BuddyBoss/public
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class Post_Anonymously_For_BuddyBoss_Public_Render_Activity {
+class Post_Anonymously_For_BuddyBoss_Public_Render_Activity_Comments {
 
     /**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_For_BuddyBoss_Public_Render_Activity
+	 * @var Post_Anonymously_For_BuddyBoss_Public_Render_Activity_Comments
 	 * @since 1.0.0
 	 */
 	protected static $_instance = null;
@@ -39,7 +39,7 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Activity {
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_For_BuddyBoss_Public_Render_Activity
+	 * @var Post_Anonymously_For_BuddyBoss_Public_Render_Activity_Comments
 	 * @since 1.0.0
 	 */
 	protected $_functions = null;
@@ -82,18 +82,13 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Activity {
 		/**
 		 * Hook to add filter so that the normal user can not see the Post author data
 		 */
-		add_action( 'bp_before_activity_entry', array( $this, 'before_activity_entry' ), 1000 );
+		add_action( 'bp_before_activity_comment_entry', array( $this, 'activity_comment_entry' ), 1000 );
 
 		/**
 		 * Hook to add filter so that the normal user can not see the Post author data
 		 * Previous was using this bp_after_activity_entry but find out this hook create an issue into the comment area where the other user profile is not visiable
 		 */
-		add_action( 'bp_after_activity_activity_content', array( $this, 'after_activity' ), 1000 );
-
-		/**
-		 * Hook to add filter so that the normal user can not see the Post author data
-		 */
-		add_filter( 'bp_groups_format_activity_action_activity_update', array( $this, 'group_activity_update' ), 1000, 2 );
+		add_action( 'bp_activity_after_comment_content', array( $this, 'after_comment_content' ), 1000 );
 	}
 
 	/**
@@ -101,23 +96,22 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Activity {
 	 *
 	 * @since    1.0.0
 	 */
-	public function before_activity_entry() {
+	public function activity_comment_entry() {
 		
 		/**
 		 * Check if the activity is anonymously or not
 		 */
-		if( $this->_functions->is_anonymously_activity( bp_get_activity_id() ) ) {
-
-			$user_link = $this->_functions->anonymous_user_label();
+		if( 
+			$this->_functions->is_anonymously_activity( bp_get_activity_id() )
+			&& bp_get_activity_user_id() == bp_get_activity_comment_user_id()
+		) {
 
 			$activity = $this->_functions->get_activity();
-
 			if( empty( $this->_functions->show_anonymously_users( $activity->user_id, $activity->item_id ) ) ) {
-
 				/**
 				 * For User Link on the Avatar
 				 */
-				add_filter( 'bp_get_activity_user_link', array( $this, 'activity_user_link' ), 1000 );
+				add_filter( 'bp_activity_comment_user_link', array( $this, 'comment_user_link' ), 1000 );
 
 				// /**
 				//  * For User Avatar
@@ -125,10 +119,10 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Activity {
 				add_filter( 'bp_get_activity_avatar', array( $this, 'activity_avatar' ), 1000 );
 			}
 
-			// /**
-			//  * For user link and the username in the Activity  after avatar
-			//  */
-			add_filter( 'bp_core_get_userlink', array( $this, 'activity_userlink' ), 1000, 2 );
+			/**
+			 * For activity comment user name
+			 */
+			add_filter( 'bp_activity_comment_name', array( $this, 'activity_comment_name' ), 1000 );
 
 		}
 	}
@@ -138,20 +132,28 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Activity {
 	 *
 	 * @since    1.0.0
 	 */
-	public function after_activity() {
+	public function after_comment_content() {
+		/**
+		 * For User Link on the Avatar
+		 */
+		remove_filter( 'bp_activity_comment_user_link', array( $this, 'comment_user_link' ), 1000 );
 
-		remove_filter( 'bp_get_activity_user_link', array( $this, 'activity_user_link' ), 1000 );
-
+		// /**
+		//  * For User Avatar
+		//  */
 		remove_filter( 'bp_get_activity_avatar', array( $this, 'activity_avatar' ), 1000 );
 
-		remove_filter( 'bp_core_get_userlink', array( $this, 'activity_userlink' ), 1000 );
+		/**
+		 * For activity comment user name
+		 */
+		remove_filter( 'bp_activity_comment_name', array( $this, 'activity_comment_name' ), 1000 );
 
 	}
 
 	/**
 	 * Remove the User Profile Link
 	 */
-	public function activity_user_link( $link ) {
+	public function comment_user_link( $link ) {
 		return '';
 	}
 
@@ -173,38 +175,16 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Activity {
 	/**
 	 * Remove the User Profile Link
 	 */
-	public function activity_userlink( $link, $user_id ) {
-		return $this->_functions->anonymous_user_label();
-	}
-
-	/**
-	 * Update the activity header seaction
-	 */
-	function group_activity_update( $action, $activity ) {
-
-		/**
-		 * Check if the activity is anonymously or not
-		 */
-		if( 
-			! empty( $activity->id ) 
-			&& ! empty( $activity->user_id ) 
-			&& $this->_functions->is_anonymously_activity( $activity->id ) 
-		) {
-
-			$user_link = $this->_functions->anonymous_user_label();
-			if( $this->_functions->show_anonymously_users( $activity->user_id, $activity->item_id ) ) {
-				$user_link = bp_core_get_userlink( $activity->user_id );
-				$user_link .= $this->_functions->anonymous_author_user_label();
-			}
-
-
-			$group      = groups_get_group( $activity->item_id );
-			$group_link = '<a href="' . esc_url( bp_get_group_permalink( $group ) ) . '">' . bp_get_group_name( $group ) . '</a>';
-
-			$action = sprintf( __( '%1$s posted an update in the group %2$s', 'post-anonymously-for-buddyboss' ), $user_link, $group_link );
+	public function activity_comment_name( $name ) {
+		
+		$activity = $this->_functions->get_activity();
+		if( $this->_functions->show_anonymously_users( $activity->user_id, $activity->item_id ) ) {
+			$name .= $this->_functions->anonymous_author_user_commnet_label();
+		} else {
+			$name = $this->_functions->anonymous_user_label();
 		}
 
-		return $action;
+		return $name;
 	}
 
 }

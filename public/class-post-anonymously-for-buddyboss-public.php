@@ -80,6 +80,13 @@ class Post_Anonymously_For_BuddyBoss_Public {
 
 
 		/**
+		 * The class responsible for defining all actions that occur in the public-facing for rendering activity comments
+		 * side of the site.
+		 */
+		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'public/partials/post-anonymously-for-buddyboss-public-render-activity-comments.php';
+
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing for rendering notifications
 		 * side of the site.
 		 */
@@ -100,9 +107,9 @@ class Post_Anonymously_For_BuddyBoss_Public {
 
 		Post_Anonymously_For_BuddyBoss_Public_Save_Meta::instance()->hooks();
 
-
 		Post_Anonymously_For_BuddyBoss_Public_Render_Activity::instance()->hooks();
 
+		Post_Anonymously_For_BuddyBoss_Public_Render_Activity_Comments::instance()->hooks();
 
 		Post_Anonymously_For_BuddyBoss_Public_Render_Notifications::instance()->hooks();
 		

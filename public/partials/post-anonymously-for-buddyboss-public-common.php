@@ -78,10 +78,36 @@ class Post_Anonymously_For_BuddyBoss_Public_Common {
 	}
 
 	/**
+	 * Show the anonymously user name to the admin, Moderator and to the anonymously user itself
+	 */
+	public function show_anonymously_users( $activity_user_id, $activity_group_id ) {
+
+		$show = false;
+
+		if( 
+			$this->login_user_is_activity_author( $activity_user_id )
+			|| $this->is_group_mods( $activity_user_id, $activity_group_id )
+			|| $this->is_group_admins( $activity_user_id, $activity_group_id )
+		) {
+			$show = true;
+		}
+
+		return $show;
+	}
+
+	/**
 	 * Remove the User Profile Link
 	 */
 	public function anonymous_user_label() {
 		return __( 'Anonymous Member', 'post-anonymously-for-buddyboss' );
+	}
+
+	/**
+	 * get the global activity 
+	 */
+	public function get_activity() {
+		global $activities_template;
+		return $activities_template->activity;
 	}
 
 	/**
@@ -137,10 +163,17 @@ class Post_Anonymously_For_BuddyBoss_Public_Common {
 	}
 
 	/**
-	 * Remove the User Profile Link
+	 * Remove the User Profile Link on activity
 	 */
 	public function anonymous_author_user_label() {
 		return __( ' ( Anonymous Post )', 'post-anonymously-for-buddyboss' );
+	}
+
+	/**
+	 * Remove the User Profile Link on activity comment
+	 */
+	public function anonymous_author_user_commnet_label() {
+		return __( ' ( Anonymous Comment )', 'post-anonymously-for-buddyboss' );
 	}
 
 }

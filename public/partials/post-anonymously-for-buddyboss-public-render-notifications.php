@@ -84,6 +84,7 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Notifications {
 		 */
 		add_filter( 'bb_groups_single_bb_groups_subscribed_activity_notification', array( $this, 'group_activity_notification' ), 1000, 5 );
 
+		add_filter( 'bb_groups_single_bb_activity_comment_notification', array( $this, 'group_activity_notification' ), 1000, 5 );
 
 		add_action( 'notifications_loop_start', array( $this, 'notifications_loop_start' ) );
 
@@ -191,16 +192,19 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Notifications {
 		$notification     	= buddypress()->notifications->query_loop->notification;
 
 		if( ! empty( $notification ) ) {
+
 			$component        	= $notification->component_name;
 			$component_action	= $notification->component_action;
 			$activity_user_id 	= $notification->secondary_item_id;
 			
 			if( 
 				$user_id == $activity_user_id 
-				&& 'groups' == $component 
-				&& 'bb_groups_subscribed_activity' == $component_action 
+				|| ( 'groups' == $component && 'bb_groups_subscribed_activity' == $component_action )
+				|| ( 'activity' == $component && 'bb_activity_comment' == $component_action )
 			) {
+
 				$activity_id 		= $notification->item_id;
+
 				if( $this->_functions->is_anonymously_activity( $activity_id ) ) {
 					$value =  true;
 				}
