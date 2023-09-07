@@ -71,7 +71,6 @@ class Post_Anonymously_For_BuddyBoss_Public {
 		 */
 		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'public/partials/post-anonymously-for-buddyboss-public-save-meta.php';
 
-
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing for rendering activity
 		 * side of the site.
@@ -84,7 +83,6 @@ class Post_Anonymously_For_BuddyBoss_Public {
 		 * side of the site.
 		 */
 		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'public/partials/post-anonymously-for-buddyboss-public-render-activity-comments.php';
-
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing for rendering notifications

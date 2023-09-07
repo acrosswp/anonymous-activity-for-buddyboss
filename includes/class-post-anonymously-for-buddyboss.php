@@ -82,6 +82,7 @@ final class Post_Anonymously_For_BuddyBoss {
 		} else {
 			$this->version = '1.0.0';
 		}
+
 		$this->plugin_name = 'post-anonymously-for-buddyboss';
 
 		$this->define_constants();
@@ -158,7 +159,9 @@ final class Post_Anonymously_For_BuddyBoss {
 		 * @since    1.0.0
 		 */
 		if( apply_filters( 'post-anonymously-for-buddyboss-load', true ) ) {
+
 			$this->define_admin_hooks();
+			
 			$this->define_public_hooks();
 		}
 
@@ -205,12 +208,15 @@ final class Post_Anonymously_For_BuddyBoss {
 			 */
 			require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'admin/integration/acrosswp-menu.php';
 			AcrossWP_Main_Menu::instance();
-		}
+		}	
 
 		/**
 		 * Check if the class does not exits then only allow the file to add
 		 */
 		if( ! class_exists( 'AcrossWP_Main_Menu_Licenses' ) ) {
+
+			add_filter( 'acrosswp_plugins_licenses', array( $this, 'licenses' ), 100, 1 );
+
 			/**
 			 * The class responsible for loading the dependency main class
 			 * core plugin.
@@ -289,6 +295,32 @@ final class Post_Anonymously_For_BuddyBoss {
 
 		$this->loader->add_action( 'admin_init', $plugin_update, 'setup_updater' );
 
+	}
+
+	/**
+	 * Load This plugin licenses so that it can get updated via EDD
+	 */
+	public function licenses( $licenses ) {
+		$licenses[] = array(
+			'id' => '705',
+			'key' => $this->plugin_name,
+			'name' => $this->plugin_name
+		);
+		
+		$licenses[] = array(
+			'id' => '705',
+			'key' => $this->plugin_name . '_second',
+			'name' => $this->plugin_name . '_second'
+		);
+
+
+		$licenses[] = array(
+			'id' => '705',
+			'key' => $this->plugin_name . '_third',
+			'name' => $this->plugin_name . '_third'
+		);
+
+		return $licenses;
 	}
 
 	/**

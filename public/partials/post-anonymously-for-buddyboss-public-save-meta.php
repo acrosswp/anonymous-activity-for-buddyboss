@@ -3,20 +3,6 @@
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Provide a public-facing view for the plugin
- *
- * This file is used to markup the public-facing aspects of the plugin.
- *
- * @link       https://acrosswp.com
- * @since      1.0.0
- *
- * @package    Post_Anonymously_For_BuddyBoss
- * @subpackage Post_Anonymously_For_BuddyBoss/public/partials
- */
-?>
-
-<?php
-/**
  * The public-facing functionality of the plugin.
  *
  * Defines the plugin name, version, and two examples hooks for how to
