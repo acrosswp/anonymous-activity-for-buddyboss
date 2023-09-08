@@ -115,7 +115,7 @@ class AcrossWP_Main_Menu_Licenses {
 						array(
 							'version' => $product_version,
 							'license' => $license_key,
-							'item_id' => $product_version,
+							'item_id' => $product_id,
 							'author'  => 'AcrossWP',
 							'beta'    => false,
 						)
