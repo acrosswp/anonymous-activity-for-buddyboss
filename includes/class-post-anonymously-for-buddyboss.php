@@ -236,16 +236,6 @@ final class Post_Anonymously_For_BuddyBoss {
 		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'includes/class-post-anonymously-for-buddyboss-i18n.php';
 
 		/**
-		 * The class responsible for defining all actions that occur in the admin area.
-		 */
-		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'admin/class-post-anonymously-for-buddyboss-admin.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the admin area for update.
-		 */
-		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'admin/update/class-post-anonymously-for-buddyboss-update.php';
-
-		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
