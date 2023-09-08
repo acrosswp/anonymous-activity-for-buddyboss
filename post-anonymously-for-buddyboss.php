@@ -37,27 +37,6 @@ if ( ! defined( 'WPINC' ) ) {
 define( 'POST_ANONYMOUSLY_FOR_BUDDYBOSS_FILES', __FILE__ );
 
 /**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-post-anonymously-for-buddyboss-activator.php
- */
-function post_anonymously_for_buddyboss_activate() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-post-anonymously-for-buddyboss-activator.php';
-	Post_Anonymously_For_BuddyBoss_Activator::activate();
-}
-
-/**
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-post-anonymously-for-buddyboss-deactivator.php
- */
-function post_anonymously_for_buddyboss_deactivate() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-post-anonymously-for-buddyboss-deactivator.php';
-	Post_Anonymously_For_BuddyBoss_Deactivator::deactivate();
-}
-
-register_activation_hook( __FILE__, 'post_anonymously_for_buddyboss_activate' );
-register_deactivation_hook( __FILE__, 'post_anonymously_for_buddyboss_deactivate' );
-
-/**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */

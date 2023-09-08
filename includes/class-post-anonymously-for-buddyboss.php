@@ -159,8 +159,6 @@ final class Post_Anonymously_For_BuddyBoss {
 		 * @since    0.0.1
 		 */
 		if( apply_filters( 'post-anonymously-for-buddyboss-load', true ) ) {
-
-			$this->define_admin_hooks();
 			
 			$this->define_public_hooks();
 		}
@@ -275,29 +273,6 @@ final class Post_Anonymously_For_BuddyBoss {
 	}
 
 	/**
-	 * Register all of the hooks related to the admin area functionality
-	 * of the plugin.
-	 *
-	 * @since    0.0.1
-	 * @access   private
-	 */
-	private function define_admin_hooks() {
-		
-		$plugin_admin = new Post_Anonymously_For_BuddyBoss_Admin( $this->get_plugin_name(), $this->get_version() );
-
-		$plugin_update = new Post_Anonymously_For_BuddyBoss_Update( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_action( 'bp_setup_integrations', $plugin_admin, 'register_integration' );
-
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
-
-		$this->loader->add_action( 'admin_init', $plugin_update, 'setup_updater' );
-
-	}
-
-	/**
 	 * Load This plugin licenses so that it can get updated via EDD
 	 */
 	public function licenses( $licenses ) {
@@ -322,8 +297,6 @@ final class Post_Anonymously_For_BuddyBoss {
 
 		$plugin_public = new Post_Anonymously_For_BuddyBoss_Public( $this->get_plugin_name(), $this->get_version() );
 
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts', -1 );
 
 		$this->loader->add_action( 'bp_init', $plugin_public, 'bp_init', 100 );

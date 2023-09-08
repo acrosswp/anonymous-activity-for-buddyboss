@@ -17,7 +17,7 @@ var CustomCheckboxView = Backbone.View.extend({
 // Assuming you have a view for the activity post form
 var ActivityPostFormView = Backbone.View.extend({
   initialize: function(options) {
-    // Additional initialization logic if needed
+    alert( "Tewst" );
   },
   render: function() {
     // Render the checkbox within the activity post form

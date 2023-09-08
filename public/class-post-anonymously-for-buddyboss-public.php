@@ -132,7 +132,7 @@ class Post_Anonymously_For_BuddyBoss_Public {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_URL . 'assets/dist/css/frontend-style.css', array(), $this->version, 'all' );
+		// wp_enqueue_style( $this->plugin_name, POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_URL . 'assets/dist/css/frontend-style.css', array(), $this->version, 'all' );
 
 	}
 
