@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
  * The public-facing functionality of the plugin.
  *
  * @link       https://acrosswp.com
- * @since      1.0.0
+ * @since      0.0.1
  *
  * @package    Post_Anonymously_For_BuddyBoss
  * @subpackage Post_Anonymously_For_BuddyBoss/public
@@ -27,7 +27,7 @@ class Post_Anonymously_For_BuddyBoss_Public {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -36,7 +36,7 @@ class Post_Anonymously_For_BuddyBoss_Public {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -45,7 +45,7 @@ class Post_Anonymously_For_BuddyBoss_Public {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -94,7 +94,7 @@ class Post_Anonymously_For_BuddyBoss_Public {
 	/**
 	 * Register the hooks that are going to load into the bp_init
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 */
 	public function bp_init() {
 
@@ -116,7 +116,7 @@ class Post_Anonymously_For_BuddyBoss_Public {
 	/**
 	 * Register the stylesheets for the public-facing side of the site.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 */
 	public function enqueue_styles() {
 
@@ -139,7 +139,7 @@ class Post_Anonymously_For_BuddyBoss_Public {
 	/**
 	 * Register the JavaScript for the public-facing side of the site.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 */
 	public function enqueue_scripts() {
 

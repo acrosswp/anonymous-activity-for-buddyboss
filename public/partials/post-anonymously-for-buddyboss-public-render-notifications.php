@@ -18,7 +18,7 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Notifications {
 	 * The single instance of the class.
 	 *
 	 * @var Post_Anonymously_For_BuddyBoss_Public_Render_Notifications
-	 * @since 1.0.0
+	 * @since 0.0.1
 	 */
 	protected static $_instance = null;
 
@@ -26,14 +26,14 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Notifications {
 	 * The single instance of the class.
 	 *
 	 * @var Post_Anonymously_For_BuddyBoss_Public_Render_Notifications
-	 * @since 1.0.0
+	 * @since 0.0.1
 	 */
 	protected $_functions = null;
 
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -48,7 +48,7 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Notifications {
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
 	 *
-	 * @since 1.0.0
+	 * @since 0.0.1
 	 * @static
 	 * @see Post_Anonymously_For_BuddyBoss()
 	 * @return Post_Anonymously_For_BuddyBoss - Main instance.

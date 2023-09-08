@@ -20,7 +20,7 @@
  * https://github.com/acrosswp/post-anonymously-for-buddyboss
  *
  * @link       https://acrosswp.com
- * @since      1.0.0
+ * @since      0.0.1
  *
  * @package    Post_Anonymously_For_BuddyBoss
  */

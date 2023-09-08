@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
  * so that it is ready for translation.
  *
  * @link       https://acrosswp.com
- * @since      1.0.0
+ * @since      0.0.1
  *
  * @package    Post_Anonymously_For_BuddyBoss
  * @subpackage Post_Anonymously_For_BuddyBoss/includes
@@ -21,7 +21,7 @@ defined( 'ABSPATH' ) || exit;
  * Loads and defines the internationalization files for this plugin
  * so that it is ready for translation.
  *
- * @since      1.0.0
+ * @since      0.0.1
  * @package    Post_Anonymously_For_BuddyBoss
  * @subpackage Post_Anonymously_For_BuddyBoss/includes
  * @author     AcrossWP <contact@acrosswp.com>
@@ -32,7 +32,7 @@ class Post_Anonymously_For_BuddyBoss_i18n {
 	/**
 	 * Load the plugin text domain for translation.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 */
 	public function load_plugin_textdomain() {
 

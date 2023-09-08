@@ -18,7 +18,7 @@ class Post_Anonymously_For_BuddyBoss_BuddyBoss_Integration extends BP_Integratio
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */

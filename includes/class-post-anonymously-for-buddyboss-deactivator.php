@@ -6,7 +6,7 @@ defined( 'ABSPATH' ) || exit;
  * Fired during plugin deactivation
  *
  * @link       https://acrosswp.com
- * @since      1.0.0
+ * @since      0.0.1
  *
  * @package    Post_Anonymously_For_BuddyBoss
  * @subpackage Post_Anonymously_For_BuddyBoss/includes
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * This class defines all code necessary to run during the plugin's deactivation.
  *
- * @since      1.0.0
+ * @since      0.0.1
  * @package    Post_Anonymously_For_BuddyBoss
  * @subpackage Post_Anonymously_For_BuddyBoss/includes
  * @author     AcrossWP <contact@acrosswp.com>
@@ -29,7 +29,7 @@ class Post_Anonymously_For_BuddyBoss_Deactivator {
 	 *
 	 * Long Description.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 */
 	public static function deactivate() {
 

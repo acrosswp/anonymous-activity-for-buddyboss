@@ -13,7 +13,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * This class defines all code necessary to run during the plugin's licences and update.
  *
- * @since      1.0.0
+ * @since      0.0.1
  * @package    AcrossWP_Main_Menu
  * @subpackage AcrossWP_Main_Menu/includes
  * @author     AcrossWP <contact@acrosswp.com>
@@ -24,14 +24,14 @@ class AcrossWP_Main_Menu {
 	 * The single instance of the class.
 	 *
 	 * @var AcrossWP_Main_Menu
-	 * @since 1.0.0
+	 * @since 0.0.1
 	 */
 	protected static $_instance = null;
 
 	/**
 	 * Initialize the collections used to maintain the actions and filters.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 */
 	public function __construct() {
 
@@ -48,7 +48,7 @@ class AcrossWP_Main_Menu {
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
 	 *
-	 * @since 1.0.0
+	 * @since 0.0.1
 	 * @static
 	 * @see Post_Anonymously_For_BuddyBoss_Loader()
 	 * @return Post_Anonymously_For_BuddyBoss_Loader - Main instance.

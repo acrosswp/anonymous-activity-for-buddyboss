@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
  * public-facing side of the site and the admin area.
  *
  * @link       https://acrosswp.com
- * @since      1.0.0
+ * @since      0.0.1
  *
  * @package    Post_Anonymously_For_BuddyBoss
  * @subpackage Post_Anonymously_For_BuddyBoss/includes
@@ -24,7 +24,7 @@ defined( 'ABSPATH' ) || exit;
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
  *
- * @since      1.0.0
+ * @since      0.0.1
  * @package    Post_Anonymously_For_BuddyBoss
  * @subpackage Post_Anonymously_For_BuddyBoss/includes
  * @author     AcrossWP <contact@acrosswp.com>
@@ -35,7 +35,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 * The single instance of the class.
 	 *
 	 * @var Post_Anonymously_For_BuddyBoss
-	 * @since 1.0.0
+	 * @since 0.0.1
 	 */
 	protected static $_instance = null;
 
@@ -43,7 +43,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   protected
 	 * @var      Post_Anonymously_For_BuddyBoss_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
@@ -52,7 +52,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	/**
 	 * The unique identifier of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   protected
 	 * @var      string    $plugin_name    The string used to uniquely identify this plugin.
 	 */
@@ -61,7 +61,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	/**
 	 * The current version of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   protected
 	 * @var      string    $version    The current version of the plugin.
 	 */
@@ -74,13 +74,13 @@ final class Post_Anonymously_For_BuddyBoss {
 	 * Load the dependencies, define the locale, and set the hooks for the admin area and
 	 * the public-facing side of the site.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 */
 	public function __construct() {
 		if ( defined( 'POST_ANONYMOUSLY_FOR_BUDDYBOSS_VERSION' ) ) {
 			$this->version = POST_ANONYMOUSLY_FOR_BUDDYBOSS_VERSION;
 		} else {
-			$this->version = '1.0.0';
+			$this->version = '0.0.1';
 		}
 
 		$this->plugin_name = 'post-anonymously-for-buddyboss';
@@ -100,7 +100,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
 	 *
-	 * @since 1.0.0
+	 * @since 0.0.1
 	 * @static
 	 * @see Post_Anonymously_For_BuddyBoss()
 	 * @return Post_Anonymously_For_BuddyBoss - Main instance.
@@ -148,7 +148,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 *
 	 * Uses the plugins_loaded to load all the hooks and filters
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 */
 	public function load_hooks() {
@@ -156,7 +156,7 @@ final class Post_Anonymously_For_BuddyBoss {
 		/**
 		 * Check if plugin can be loaded safely or not
 		 * 
-		 * @since    1.0.0
+		 * @since    0.0.1
 		 */
 		if( apply_filters( 'post-anonymously-for-buddyboss-load', true ) ) {
 
@@ -180,7 +180,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 */
 	private function load_dependencies() {
@@ -263,7 +263,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 * Uses the Post_Anonymously_For_BuddyBoss_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 */
 	private function set_locale() {
@@ -278,7 +278,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
@@ -301,23 +301,25 @@ final class Post_Anonymously_For_BuddyBoss {
 	 * Load This plugin licenses so that it can get updated via EDD
 	 */
 	public function licenses( $licenses ) {
-		$licenses[] = array(
-			'id' => '705',
-			'key' => $this->plugin_name,
-			'name' => $this->plugin_name
+		$licenses[100] = array(
+			'id' 		=> '405',
+			'key' 		=> $this->plugin_name,
+			'version'	=> $this->version,
+			'name' 		=> 'Post Anonymously For BuddyBoss'
 		);
 		
-		$licenses[] = array(
-			'id' => '705',
-			'key' => $this->plugin_name . '_second',
-			'name' => $this->plugin_name . '_second'
+		$licenses[200] = array(
+			'id' 		=> '405',
+			'key' 		=> $this->plugin_name . '_second',
+			'version'	=> $this->version,
+			'name' 		=> 'Post Anonymously For BuddyBoss One'
 		);
 
-
-		$licenses[] = array(
-			'id' => '705',
-			'key' => $this->plugin_name . '_third',
-			'name' => $this->plugin_name . '_third'
+		$licenses[300] = array(
+			'id' 		=> '405',
+			'key' 		=> $this->plugin_name . '_third',
+			'version'	=> $this->version,
+			'name' 		=> 'Post Anonymously For BuddyBoss Two'
 		);
 
 		return $licenses;
@@ -327,7 +329,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 * Register all of the hooks related to the public-facing functionality
 	 * of the plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 */
 	private function define_public_hooks() {
@@ -345,7 +347,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	/**
 	 * Run the loader to execute all of the hooks with WordPress.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 */
 	public function run() {
 		$this->loader->run();
@@ -355,7 +357,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 * The name of the plugin used to uniquely identify it within the context of
 	 * WordPress and to define internationalization functionality.
 	 *
-	 * @since     1.0.0
+	 * @since     0.0.1
 	 * @return    string    The name of the plugin.
 	 */
 	public function get_plugin_name() {
@@ -365,7 +367,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	/**
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
-	 * @since     1.0.0
+	 * @since     0.0.1
 	 * @return    Post_Anonymously_For_BuddyBoss_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
@@ -375,7 +377,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	/**
 	 * Retrieve the version number of the plugin.
 	 *
-	 * @since     1.0.0
+	 * @since     0.0.1
 	 * @return    string    The version number of the plugin.
 	 */
 	public function get_version() {

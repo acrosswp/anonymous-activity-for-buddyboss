@@ -3,7 +3,7 @@
  * Post Anonymously For BuddyBoss.
  *
  * @package Post_Anonymously_For_BuddyBoss\Updater
- * @since Post Anonymously For BuddyBoss 1.0.0
+ * @since Post Anonymously For BuddyBoss 0.0.1
  */
 
   
@@ -25,7 +25,7 @@ class Post_Anonymously_For_BuddyBoss_Update {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -34,7 +34,7 @@ class Post_Anonymously_For_BuddyBoss_Update {
 	/**
 	 * The DB version slug of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -43,7 +43,7 @@ class Post_Anonymously_For_BuddyBoss_Update {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
@@ -52,7 +52,7 @@ class Post_Anonymously_For_BuddyBoss_Update {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since    0.0.1
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -69,7 +69,7 @@ class Post_Anonymously_For_BuddyBoss_Update {
 	 * If there is no raw DB version, we infer that this is the first installation.
 	 *
 	 * @return bool True if this is a fresh BP install, otherwise false.
-	 * @since Post Anonymously For BuddyBoss 1.0.0
+	 * @since Post Anonymously For BuddyBoss 0.0.1
 	 */
 	public function is_install() {
 		return ! $this->get_db_version_raw();
@@ -79,7 +79,7 @@ class Post_Anonymously_For_BuddyBoss_Update {
 	/**
 	 * Get the DB version of Post Anonymously For BuddyBoss
 	 * 
-	 * @since Post Anonymously For BuddyBoss 1.0.0
+	 * @since Post Anonymously For BuddyBoss 0.0.1
 	 */
 	public function get_db_version_raw() {
 		return get_option( $this->plugin_name_db_version, '0.0.1' );
@@ -88,7 +88,7 @@ class Post_Anonymously_For_BuddyBoss_Update {
 	/**
 	 * Update the BP version stored in the database to the current version.
 	 *
-	 * @since Post Anonymously For BuddyBoss 1.0.0
+	 * @since Post Anonymously For BuddyBoss 0.0.1
 	 */
 	function version_bump() {
 		update_option( $this->plugin_name_db_version, POST_ANONYMOUSLY_FOR_BUDDYBOSS_VERSION );
@@ -97,7 +97,7 @@ class Post_Anonymously_For_BuddyBoss_Update {
 	/**
 	 * Set up the Post Anonymously For BuddyBoss updater.
 	 *
-	 * @since Post Anonymously For BuddyBoss 1.0.0
+	 * @since Post Anonymously For BuddyBoss 0.0.1
 	 */
 	function setup_updater() {
 		// Are we running an outdated version of Post Anonymously For BuddyBoss?
@@ -116,7 +116,7 @@ class Post_Anonymously_For_BuddyBoss_Update {
 	 * an update.
 	 *
 	 * @return bool True if update, otherwise false.
-	 * @since Post Anonymously For BuddyBoss 1.0.0
+	 * @since Post Anonymously For BuddyBoss 0.0.1
 	 */
 	function is_update() {
 
@@ -147,7 +147,7 @@ class Post_Anonymously_For_BuddyBoss_Update {
 	 * This is most often used when the data schema changes, but should also be used
 	 * to correct issues with Post Anonymously For BuddyBoss metadata silently on software update.
 	 *
-	 * @since Post Anonymously For BuddyBoss 1.0.0
+	 * @since Post Anonymously For BuddyBoss 0.0.1
 	 */
 	function version_updater() {
 
@@ -157,7 +157,7 @@ class Post_Anonymously_For_BuddyBoss_Update {
 		// Get the raw database version.
 		$current_live = POST_ANONYMOUSLY_FOR_BUDDYBOSS_VERSION;
 
-		if ( version_compare( '1.0.0', $current_db ) ) {
+		if ( version_compare( '0.0.1', $current_db ) ) {
 			post_anonymously_for_buddyboss_to_1_0_0();
 		}
 

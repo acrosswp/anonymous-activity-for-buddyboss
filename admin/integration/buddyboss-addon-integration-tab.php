@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
  * This file is used to markup the admin-facing aspects of the plugin.
  *
  * @link       https://acrosswp.com
- * @since      1.0.0
+ * @since      0.0.1
  *
  * @package    Post_Anonymously_For_BuddyBoss
  * @subpackage Post_Anonymously_For_BuddyBoss/admin/partials
@@ -17,7 +17,7 @@ defined( 'ABSPATH' ) || exit;
 /**
  * Setup Compatibility integration admin tab class.
  *
- * @since BuddyBoss 1.0.0
+ * @since BuddyBoss 0.0.1
  */
 class Post_Anonymously_For_BuddyBoss_Admin_Integration_Tab extends BP_Admin_Integration_tab {
 
