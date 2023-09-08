@@ -34,3 +34,6 @@ Yes.
 
 = 0.0.1 =
 * Release Plugin Beta
+
+= 0.0.2 =
+* Add label and conditions for checkbox to display in Group tab only
