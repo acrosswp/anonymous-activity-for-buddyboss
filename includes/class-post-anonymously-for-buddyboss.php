@@ -301,25 +301,11 @@ final class Post_Anonymously_For_BuddyBoss {
 	 * Load This plugin licenses so that it can get updated via EDD
 	 */
 	public function licenses( $licenses ) {
-		$licenses[100] = array(
+		$licenses[1000] = array(
 			'id' 		=> '405',
 			'key' 		=> $this->plugin_name,
 			'version'	=> $this->version,
 			'name' 		=> 'Post Anonymously For BuddyBoss'
-		);
-		
-		$licenses[200] = array(
-			'id' 		=> '405',
-			'key' 		=> $this->plugin_name . '_second',
-			'version'	=> $this->version,
-			'name' 		=> 'Post Anonymously For BuddyBoss One'
-		);
-
-		$licenses[300] = array(
-			'id' 		=> '405',
-			'key' 		=> $this->plugin_name . '_third',
-			'version'	=> $this->version,
-			'name' 		=> 'Post Anonymously For BuddyBoss Two'
 		);
 
 		return $licenses;

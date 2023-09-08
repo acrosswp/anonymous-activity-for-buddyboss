@@ -364,6 +364,9 @@ class AcrossWP_Main_Menu_Licenses {
 		$this->deactivate_license_main();
 	}
 
+	/**
+	 * Tab to view all the product
+	 */
 	public function print_settings_tabs() {
 		$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : '';
 
@@ -382,16 +385,14 @@ class AcrossWP_Main_Menu_Licenses {
 
 			$dashicon_class = 'lock';
 
-			$package_status = $this->get_package_status( $package['key'] );
+			$package_status = $this->get_license_status( $package['key'] );
+
 			switch ( $package_status ) {
-				case 'active':
+				case 'valid':
 					$dashicon_class = 'yes-alt';
 					break;
 				case 'inactive':
 					$dashicon_class = 'warning';
-					break;
-				case 'active_indirect':
-					$dashicon_class = 'yes-alt indirect';
 					break;
 			}
 
@@ -404,27 +405,43 @@ class AcrossWP_Main_Menu_Licenses {
 	 * Print the licences fields
 	 */
 	public function print_settings_content() {
-
-		$active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : '';
-
-		$currnet_package = false;
-
-		$packages = $this->get_packages();
-
-		if ( ! $active_tab ) {
-			// get first package. That becomes the active tab
-			if ( ! empty( $packages ) ) {
-				foreach ( $packages as $package ) {
-					$active_tab = $package['key'];
-					$currnet_package = $package;
-					break;
-				}
-			}
-		} else {
-			$currnet_package = reset( $packages );
+		$currnet_package	= $this->get_the_current_package();
+		if( ! empty( $currnet_package ) ) {
+			$this->load_license_key_settings_field( $currnet_package );
 		}
 
-		$this->load_license_key_settings_field( $currnet_package );
+	}
+
+	/**
+	 * Get the view tab key or else return false
+	 */
+	function get_current_tab() {
+		return isset( $_GET['tab'] ) ? trim( $_GET['tab'] ) : false;
+	}
+
+	/**
+	 * Display the Package based on tag or else it will display the first one
+	 */
+	function get_the_current_package() {
+
+		$currnet_package	= false;
+		$active_tab 		= $this->get_current_tab();
+		$packages 			= $this->get_packages();
+
+		if( ! empty( $packages ) ) {
+			if( empty( $active_tab ) ) {
+				$currnet_package = reset( $packages );
+			} else {
+				foreach ( $packages as $package ) {
+					if( $active_tab == $package['key'] ) {
+						$currnet_package = $package;
+						break;
+					}
+				}
+			}
+		}
+
+		return $currnet_package;
 	}
 
 	/**
@@ -436,10 +453,10 @@ class AcrossWP_Main_Menu_Licenses {
 		$name = $license['name'];
 
 		$license = $this->get_license_key( $license_key );
-		$status  = $this->get_license_status( $license_key );
+		$status  = $this->get_license_status( $license_key ); ?>
+		
+		<p class="description"><?php echo $name; ?></p>
 
-	?>
-	<p class="description"><?php echo $name; ?></p>
 		<form method="post" action="">
 			<?php
 			printf(
@@ -452,15 +469,16 @@ class AcrossWP_Main_Menu_Licenses {
 				$license_key
 			);
 
-			$button = array(
-				'name'  => 'acrosswp_license_deactivate',
-				'label' => __( 'Deactivate License' ),
-			);
 
 			if ( 'valid' !== $status ) {
 				$button = array(
 					'name'  => 'acrosswp_license_activate',
 					'label' => __( 'Activate License' ),
+				);
+			} else {
+				$button = array(
+					'name'  => 'acrosswp_license_deactivate',
+					'label' => __( 'Deactivate License' ),
 				);
 			}
 
@@ -468,10 +486,6 @@ class AcrossWP_Main_Menu_Licenses {
 			?>
 			<input type="submit" class="button-secondary" name="<?php echo esc_attr( $button['name'] ); ?>" value="<?php echo esc_attr( $button['label'] ); ?>"/>
 		</form><?php
-	}
-
-	function get_package_status( $key ) {
-		return false;
 	}
 
 	/**
@@ -602,7 +616,7 @@ class AcrossWP_Main_Menu_Licenses {
 
 					case 'item_name_mismatch':
 						/* translators: the plugin name */
-						$message = sprintf( __( 'This appears to be an invalid license key for %s.', 'post-anonymously-for-buddyboss' ), EDD_SAMPLE_ITEM_NAME );
+						$message = sprintf( __( 'This appears to be an invalid license key for %s.', 'post-anonymously-for-buddyboss' ), $package['id'] );
 						break;
 
 					case 'no_activations_left':
