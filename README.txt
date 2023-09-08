@@ -32,8 +32,11 @@ Yes.
 
 == Changelog ==
 
-= 0.0.1 =
-* Release Plugin Beta
+= 0.0.3 =
+* Add licenses so that user can update the plugins
 
 = 0.0.2 =
 * Add label and conditions for checkbox to display in Group tab only
+
+= 0.0.1 =
+* Release Plugin Beta

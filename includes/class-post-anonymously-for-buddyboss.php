@@ -267,7 +267,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 */
 	public function licenses( $licenses ) {
 		$licenses[1000] = array(
-			'id' 		=> '405',
+			'id' 		=> 705,
 			'key' 		=> $this->plugin_name,
 			'version'	=> $this->version,
 			'name' 		=> 'Post Anonymously For BuddyBoss'

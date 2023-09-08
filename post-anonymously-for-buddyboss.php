@@ -15,7 +15,7 @@
  * Plugin Name:       Post Anonymously For BuddyBoss
  * Plugin URI:        https://acrosswp.com
  * Description:       Post Anonymously For BuddyBoss by AcrossWP
- * Version:           0.0.2
+ * Version:           0.0.3
  * Author:            AcrossWP
  * Author URI:        https://acrosswp.com
  * License:           GPL-2.0+
