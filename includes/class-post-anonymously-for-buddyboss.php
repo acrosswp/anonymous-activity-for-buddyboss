@@ -77,6 +77,9 @@ final class Post_Anonymously_For_BuddyBoss {
 	 * @since    0.0.1
 	 */
 	public function __construct() {
+
+		$this->define_constants();
+
 		if ( defined( 'POST_ANONYMOUSLY_FOR_BUDDYBOSS_VERSION' ) ) {
 			$this->version = POST_ANONYMOUSLY_FOR_BUDDYBOSS_VERSION;
 		} else {
@@ -84,8 +87,6 @@ final class Post_Anonymously_For_BuddyBoss {
 		}
 
 		$this->plugin_name = 'post-anonymously-for-buddyboss';
-
-		$this->define_constants();
 
 		$this->load_dependencies();
 
