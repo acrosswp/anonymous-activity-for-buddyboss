@@ -8,7 +8,7 @@
     "type": "git",
     "url": "git+https://github.com/acrosswp/post-anonymously.git"
   },
-  "author": "BuddyBoss",
+  "author": "AcrossWP",
   "license": "GPL-3.0-or-later",
   "bugs": {
     "url": "https://github.com/acrosswp/post-anonymously/issues"
@@ -22,6 +22,7 @@
     "update": "npm update"
   },
   "keywords": [
+    "buddypress",
     "buddyboss",
     "buddyboss-platform",
     "post-anonymously"

@@ -1,6 +1,6 @@
 === Post Anonymously ===
 Contributors: acrosswp, raftaar1191
-Tags: , buddyboss-platform, post-anonymously, post-anonymously, buddyboss, platform, platform-pro
+Tags: buddypress, buddyboss-platform, post-anonymously, post-anonymously, buddyboss, platform, platform-pro
 Donate link: https://acrosswp.com/
 Requires at least: 6.0
 Tested up to: 6.2
