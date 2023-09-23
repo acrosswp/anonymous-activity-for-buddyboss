@@ -2,7 +2,7 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-class Post_Anonymously_For_BuddyBoss_BuddyBoss_Platform_Dependency extends Post_Anonymously_For_BuddyBoss_Plugins_Dependency {
+class Post_Anonymously_BuddyBoss_Platform_Dependency extends Post_Anonymously_Plugins_Dependency {
 
     /**
      * Load this function on plugin load hook
@@ -12,7 +12,7 @@ class Post_Anonymously_For_BuddyBoss_BuddyBoss_Platform_Dependency extends Post_
         printf( 
             __( 
                 '<strong>%s</strong></a> requires the BuddyBoss Platform plugin to work. Please <a href="https://buddyboss.com/platform/" target="_blank">install BuddyBoss Platform</a> first.',
-                'post-anonymously-for-buddyboss'
+                'post-anonymously'
             ),
             $this->get_plugin_name()
         );
@@ -26,7 +26,7 @@ class Post_Anonymously_For_BuddyBoss_BuddyBoss_Platform_Dependency extends Post_
         printf( 
             __( 
                 '<strong>%s</strong></a> requires BuddyBoss Platform plugin version %s or higher to work. Please update BuddyBoss Platform.',
-                'post-anonymously-for-buddyboss'
+                'post-anonymously'
             ),
             $this->get_plugin_name(),
             $this->mini_version()
@@ -60,7 +60,7 @@ class Post_Anonymously_For_BuddyBoss_BuddyBoss_Platform_Dependency extends Post_
         printf( 
             __( 
                 '<strong>%s</strong></a> requires BuddyBoss Platform %s Component to work. Please Active the mentions Component.',
-                'post-anonymously-for-buddyboss'
+                'post-anonymously'
             ),
             $this->get_plugin_name(),
             $component_required_label
@@ -112,4 +112,4 @@ class Post_Anonymously_For_BuddyBoss_BuddyBoss_Platform_Dependency extends Post_
     }
 }
 
-new Post_Anonymously_For_BuddyBoss_BuddyBoss_Platform_Dependency();
+new Post_Anonymously_BuddyBoss_Platform_Dependency();

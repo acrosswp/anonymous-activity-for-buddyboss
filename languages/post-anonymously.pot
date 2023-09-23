@@ -1,13 +1,13 @@
-# Copyright (C) 2023 Post Anonymously For BuddyBoss
-# This file is distributed under the same license as the Post Anonymously For BuddyBoss package.
+# Copyright (C) 2023 Post Anonymously
+# This file is distributed under the same license as the Post Anonymously package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Post Anonymously For BuddyBoss\n"
+"Project-Id-Version: Post Anonymously\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "POT-Creation-Date: 2023-09-21 18:15+0000\n"
-"Report-Msgid-Bugs-To: https://github.com/acrosswp/post-anonymously-for-buddyboss/issues\n"
+"Report-Msgid-Bugs-To: https://github.com/acrosswp/post-anonymously/issues\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-KeywordsList: __;_e;_ex:1,2c;_n:1,2;_n_noop:1,2;_nx:1,2,4c;_nx_noop:1,2,3c;_x:1,2c;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c\n"
 "X-Poedit-SearchPath-0: .\n"
@@ -69,18 +69,18 @@ msgstr ""
 msgid "<strong>%s</strong></a> requires BuddyBoss Platform %s Component to work. Please Active the mentions Component."
 msgstr ""
 
-#: public/partials/post-anonymously-for-buddyboss-public-common.php:88
+#: public/partials/post-anonymously-public-common.php:88
 msgid "Anonymous Member"
 msgstr ""
 
-#: public/partials/post-anonymously-for-buddyboss-public-common.php:155
+#: public/partials/post-anonymously-public-common.php:155
 msgid " ( Anonymous Post )"
 msgstr ""
 
-#: public/partials/post-anonymously-for-buddyboss-public-common.php:162
+#: public/partials/post-anonymously-public-common.php:162
 msgid " ( Anonymous Comment )"
 msgstr ""
 
-#: public/partials/post-anonymously-for-buddyboss-public-render-activity.php:190
+#: public/partials/post-anonymously-public-render-activity.php:190
 msgid "%1$s posted an update in the group %2$s"
 msgstr ""

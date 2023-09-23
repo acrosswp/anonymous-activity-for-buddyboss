@@ -11,8 +11,8 @@ defined( 'ABSPATH' ) || exit;
  * @link       https://acrosswp.com
  * @since      0.0.1
  *
- * @package    Post_Anonymously_For_BuddyBoss
- * @subpackage Post_Anonymously_For_BuddyBoss/includes
+ * @package    Post_Anonymously
+ * @subpackage Post_Anonymously/includes
  */
 
 /**
@@ -22,11 +22,11 @@ defined( 'ABSPATH' ) || exit;
  * so that it is ready for translation.
  *
  * @since      0.0.1
- * @package    Post_Anonymously_For_BuddyBoss
- * @subpackage Post_Anonymously_For_BuddyBoss/includes
+ * @package    Post_Anonymously
+ * @subpackage Post_Anonymously/includes
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class Post_Anonymously_For_BuddyBoss_i18n {
+class Post_Anonymously_i18n {
 
 
 	/**
@@ -37,7 +37,7 @@ class Post_Anonymously_For_BuddyBoss_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'post-anonymously-for-buddyboss',
+			'post-anonymously',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

@@ -8,16 +8,16 @@ defined( 'ABSPATH' ) || exit;
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    Post_Anonymously_For_BuddyBoss
- * @subpackage Post_Anonymously_For_BuddyBoss/public
+ * @package    Post_Anonymously
+ * @subpackage Post_Anonymously/public
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class Post_Anonymously_For_BuddyBoss_Public_Render_Activity {
+class Post_Anonymously_Public_Render_Activity {
 
     /**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_For_BuddyBoss_Public_Render_Activity
+	 * @var Post_Anonymously_Public_Render_Activity
 	 * @since 0.0.1
 	 */
 	protected static $_instance = null;
@@ -25,7 +25,7 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Activity {
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_For_BuddyBoss_Public_Render_Activity
+	 * @var Post_Anonymously_Public_Render_Activity
 	 * @since 0.0.1
 	 */
 	protected $_functions = null;
@@ -39,19 +39,19 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Activity {
 	 */
 	public function __construct() {
 
-		$this->_functions = Post_Anonymously_For_BuddyBoss_Public_Common::instance();
+		$this->_functions = Post_Anonymously_Public_Common::instance();
 
 	}
 
     /**
-	 * Main Post_Anonymously_For_BuddyBoss Instance.
+	 * Main Post_Anonymously Instance.
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
 	 *
 	 * @since 0.0.1
 	 * @static
-	 * @see Post_Anonymously_For_BuddyBoss()
-	 * @return Post_Anonymously_For_BuddyBoss - Main instance.
+	 * @see Post_Anonymously()
+	 * @return Post_Anonymously - Main instance.
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -187,7 +187,7 @@ class Post_Anonymously_For_BuddyBoss_Public_Render_Activity {
 			$group      = groups_get_group( $activity->item_id );
 			$group_link = '<a href="' . esc_url( bp_get_group_permalink( $group ) ) . '">' . bp_get_group_name( $group ) . '</a>';
 
-			$action = sprintf( __( '%1$s posted an update in the group %2$s', 'post-anonymously-for-buddyboss' ), $user_link, $group_link );
+			$action = sprintf( __( '%1$s posted an update in the group %2$s', 'post-anonymously' ), $user_link, $group_link );
 		}
 
 		return $action;

@@ -8,8 +8,8 @@ defined( 'ABSPATH' ) || exit;
  * @link       https://acrosswp.com
  * @since      0.0.1
  *
- * @package    Post_Anonymously_For_BuddyBoss
- * @subpackage Post_Anonymously_For_BuddyBoss/public
+ * @package    Post_Anonymously
+ * @subpackage Post_Anonymously/public
  */
 
 /**
@@ -18,11 +18,11 @@ defined( 'ABSPATH' ) || exit;
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    Post_Anonymously_For_BuddyBoss
- * @subpackage Post_Anonymously_For_BuddyBoss/public
+ * @package    Post_Anonymously
+ * @subpackage Post_Anonymously/public
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class Post_Anonymously_For_BuddyBoss_Public {
+class Post_Anonymously_Public {
 
 	/**
 	 * The ID of this plugin.
@@ -59,36 +59,37 @@ class Post_Anonymously_For_BuddyBoss_Public {
 	 * Use to load all the class and files
 	 */
 	public function load_class() {
+
 		/**
 		 * The class responsible for defining all functions that can be use
 		 * side of the site.
 		 */
-		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'public/partials/post-anonymously-for-buddyboss-public-common.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/post-anonymously-public-common.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing save group and activity meta
 		 * side of the site.
 		 */
-		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'public/partials/post-anonymously-for-buddyboss-public-save-meta.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/post-anonymously-public-save-meta.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing for rendering activity
 		 * side of the site.
 		 */
-		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'public/partials/post-anonymously-for-buddyboss-public-render-activity.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/post-anonymously-public-render-activity.php';
 
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing for rendering activity comments
 		 * side of the site.
 		 */
-		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'public/partials/post-anonymously-for-buddyboss-public-render-activity-comments.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/post-anonymously-public-render-activity-comments.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing for rendering notifications
 		 * side of the site.
 		 */
-		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'public/partials/post-anonymously-for-buddyboss-public-render-notifications.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/post-anonymously-public-render-notifications.php';
 	}
 
 	/**
@@ -103,13 +104,13 @@ class Post_Anonymously_For_BuddyBoss_Public {
 		 */
 		$this->load_class();
 
-		Post_Anonymously_For_BuddyBoss_Public_Save_Meta::instance()->hooks();
+		Post_Anonymously_Public_Save_Meta::instance()->hooks();
 
-		Post_Anonymously_For_BuddyBoss_Public_Render_Activity::instance()->hooks();
+		Post_Anonymously_Public_Render_Activity::instance()->hooks();
 
-		Post_Anonymously_For_BuddyBoss_Public_Render_Activity_Comments::instance()->hooks();
+		Post_Anonymously_Public_Render_Activity_Comments::instance()->hooks();
 
-		Post_Anonymously_For_BuddyBoss_Public_Render_Notifications::instance()->hooks();
+		Post_Anonymously_Public_Render_Notifications::instance()->hooks();
 		
 	}
 
@@ -124,15 +125,15 @@ class Post_Anonymously_For_BuddyBoss_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Post_Anonymously_For_BuddyBoss_Loader as all of the hooks are defined
+		 * defined in Post_Anonymously_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Post_Anonymously_For_BuddyBoss_Loader will then create the relationship
+		 * The Post_Anonymously_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		// wp_enqueue_style( $this->plugin_name, POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_URL . 'assets/dist/css/frontend-style.css', array(), $this->version, 'all' );
+		// wp_enqueue_style( $this->plugin_name, POST_ANONYMOUSLY_PLUGIN_URL . 'assets/dist/css/frontend-style.css', array(), $this->version, 'all' );
 
 	}
 
@@ -147,15 +148,15 @@ class Post_Anonymously_For_BuddyBoss_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Post_Anonymously_For_BuddyBoss_Loader as all of the hooks are defined
+		 * defined in Post_Anonymously_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Post_Anonymously_For_BuddyBoss_Loader will then create the relationship
+		 * The Post_Anonymously_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 		if( bp_is_groups_component() ) {
-			wp_enqueue_script( $this->plugin_name, POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_URL . 'assets/dist/js/frontend-script.js', array( 'bp-nouveau-activity-post-form' ), $this->version, true );
+			wp_enqueue_script( $this->plugin_name, POST_ANONYMOUSLY_PLUGIN_URL . 'assets/dist/js/frontend-script.js', array( 'bp-nouveau-activity-post-form' ), $this->version, true );
 		}
 
 	}

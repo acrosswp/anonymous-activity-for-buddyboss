@@ -1,17 +1,17 @@
 {
-  "name": "post-anonymously-for-buddyboss",
-  "title": "Post Anonymously For BuddyBoss",
-  "description": "Post Anonymously For BuddyBoss by AcrossWP.",
+  "name": "post-anonymously",
+  "title": "Post Anonymously",
+  "description": "Post Anonymously by AcrossWP.",
   "homepage": "https://github.com/woocommerce/woocommerce/wiki",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/acrosswp/post-anonymously-for-buddyboss.git"
+    "url": "git+https://github.com/acrosswp/post-anonymously.git"
   },
   "author": "BuddyBoss",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/acrosswp/post-anonymously-for-buddyboss/issues"
+    "url": "https://github.com/acrosswp/post-anonymously/issues"
   },
   "scripts": {
     "build": "webpack --mode=none",
@@ -24,7 +24,7 @@
   "keywords": [
     "buddyboss",
     "buddyboss-platform",
-    "post-anonymously-for-buddyboss"
+    "post-anonymously"
   ],
   "devDependencies": {
     "@babel/cli": "7.12.8",

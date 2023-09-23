@@ -52,12 +52,12 @@ var frontend_style = Object.assign({}, custom_module, style_output, {
 
 //// POT file.
 wpPot( {
-	package: 'Post Anonymously For BuddyBoss',
-	domain: 'post-anonymously-for-buddyboss',
-	destFile: 'languages/post-anonymously-for-buddyboss.pot',
+	package: 'Post Anonymously',
+	domain: 'post-anonymously',
+	destFile: 'languages/post-anonymously.pot',
 	relativeTo: './',
 	src: [ './**/*.php' ],
-	bugReport: 'https://github.com/acrosswp/post-anonymously-for-buddyboss/issues'
+	bugReport: 'https://github.com/acrosswp/post-anonymously/issues'
 } );
 
 // Return Array of Configurations

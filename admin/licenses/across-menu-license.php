@@ -8,8 +8,8 @@ defined( 'ABSPATH' ) || exit;
  * @link       https://acrosswp.com
  * @since      0.0.1
  *
- * @package    Post_Anonymously_For_BuddyBoss
- * @subpackage Post_Anonymously_For_BuddyBoss/includes
+ * @package    Post_Anonymously
+ * @subpackage Post_Anonymously/includes
  */
 
 if ( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
@@ -18,7 +18,7 @@ if ( ! class_exists( 'EDD_SL_Plugin_Updater' ) ) {
      * The class responsible for loading edd updater class
      * core plugin.
      */
-    require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'admin/licenses/EDD_SL_Plugin_Updater.php';
+    require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'admin/licenses/EDD_SL_Plugin_Updater.php';
 }
 
 
@@ -37,7 +37,7 @@ class AcrossWP_Main_Menu_Licenses {
     /**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_For_BuddyBoss_Loader
+	 * @var Post_Anonymously_Loader
 	 * @since 0.0.1
 	 */
 	protected static $_instance = null;
@@ -111,7 +111,7 @@ class AcrossWP_Main_Menu_Licenses {
 					// setup the updater
 					$edd_updater = new EDD_SL_Plugin_Updater(
 						$this->store_url,
-						POST_ANONYMOUSLY_FOR_BUDDYBOSS_FILES,
+						POST_ANONYMOUSLY_FILES,
 						array(
 							'version' => $product_version,
 							'license' => $license_key,
@@ -256,14 +256,14 @@ class AcrossWP_Main_Menu_Licenses {
 	}
 
 	/**
-	 * Main Post_Anonymously_For_BuddyBoss_Loader Instance.
+	 * Main Post_Anonymously_Loader Instance.
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
 	 *
 	 * @since 0.0.1
 	 * @static
-	 * @see Post_Anonymously_For_BuddyBoss_Loader()
-	 * @return Post_Anonymously_For_BuddyBoss_Loader - Main instance.
+	 * @see Post_Anonymously_Loader()
+	 * @return Post_Anonymously_Loader - Main instance.
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -285,8 +285,8 @@ class AcrossWP_Main_Menu_Licenses {
 		if ( class_exists( 'AcrossWP_Main_Menu' ) && ! empty( $this->get_packages() ) ) {
 			add_submenu_page(
 				ACROSSWP_MAIN_MENU,
-				__( 'AcrossWP License Keys', 'post-anonymously-for-buddyboss' ),
-				__( 'License Keys', 'post-anonymously-for-buddyboss' ),
+				__( 'AcrossWP License Keys', 'post-anonymously' ),
+				__( 'License Keys', 'post-anonymously' ),
 				'manage_options',
 				ACROSSWP_MAIN_MENU_LICENSES,
 				array( $this, 'licenses_page' )
@@ -595,36 +595,36 @@ class AcrossWP_Main_Menu_Licenses {
 					case 'expired':
 						$message = sprintf(
 							/* translators: the license key expiration date */
-							__( 'Your license key expired on %s.', 'post-anonymously-for-buddyboss' ),
+							__( 'Your license key expired on %s.', 'post-anonymously' ),
 							date_i18n( get_option( 'date_format' ), strtotime( $license_data->expires, current_time( 'timestamp' ) ) )
 						);
 						break;
 
 					case 'disabled':
 					case 'revoked':
-						$message = __( 'Your license key has been disabled.', 'post-anonymously-for-buddyboss' );
+						$message = __( 'Your license key has been disabled.', 'post-anonymously' );
 						break;
 
 					case 'missing':
-						$message = __( 'Invalid license.', 'post-anonymously-for-buddyboss' );
+						$message = __( 'Invalid license.', 'post-anonymously' );
 						break;
 
 					case 'invalid':
 					case 'site_inactive':
-						$message = __( 'Your license is not active for this URL.', 'post-anonymously-for-buddyboss' );
+						$message = __( 'Your license is not active for this URL.', 'post-anonymously' );
 						break;
 
 					case 'item_name_mismatch':
 						/* translators: the plugin name */
-						$message = sprintf( __( 'This appears to be an invalid license key for %s.', 'post-anonymously-for-buddyboss' ), $package['id'] );
+						$message = sprintf( __( 'This appears to be an invalid license key for %s.', 'post-anonymously' ), $package['id'] );
 						break;
 
 					case 'no_activations_left':
-						$message = __( 'Your license key has reached its activation limit.', 'post-anonymously-for-buddyboss' );
+						$message = __( 'Your license key has reached its activation limit.', 'post-anonymously' );
 						break;
 
 					default:
-						$message = __( 'An error occurred, please try again.', 'post-anonymously-for-buddyboss' );
+						$message = __( 'An error occurred, please try again.', 'post-anonymously' );
 						break;
 				}
 			}

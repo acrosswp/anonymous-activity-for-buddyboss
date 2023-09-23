@@ -17,12 +17,12 @@
  * general skeleton and outline for how the file should work.
  *
  * For more information, see the following discussion:
- * https://github.com/acrosswp/post-anonymously-for-buddyboss
+ * https://github.com/acrosswp/post-anonymously
  *
  * @link       https://acrosswp.com
  * @since      0.0.1
  *
- * @package    Post_Anonymously_For_BuddyBoss
+ * @package    Post_Anonymously
  */
 
 // If uninstall not called from WordPress, then exit.

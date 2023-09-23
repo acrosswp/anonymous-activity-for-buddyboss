@@ -8,8 +8,8 @@ defined( 'ABSPATH' ) || exit;
  * @link       https://acrosswp.com
  * @since      0.0.1
  *
- * @package    Post_Anonymously_For_BuddyBoss
- * @subpackage Post_Anonymously_For_BuddyBoss/includes
+ * @package    Post_Anonymously
+ * @subpackage Post_Anonymously/includes
  */
 
 /**
@@ -19,11 +19,11 @@ defined( 'ABSPATH' ) || exit;
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Post_Anonymously_For_BuddyBoss
- * @subpackage Post_Anonymously_For_BuddyBoss/includes
+ * @package    Post_Anonymously
+ * @subpackage Post_Anonymously/includes
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class Post_Anonymously_For_BuddyBoss_Loader {
+class Post_Anonymously_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.
@@ -46,7 +46,7 @@ class Post_Anonymously_For_BuddyBoss_Loader {
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_For_BuddyBoss_Loader
+	 * @var Post_Anonymously_Loader
 	 * @since 0.0.1
 	 */
 	protected static $_instance = null;
@@ -64,14 +64,14 @@ class Post_Anonymously_For_BuddyBoss_Loader {
 	}
 
 	/**
-	 * Main Post_Anonymously_For_BuddyBoss_Loader Instance.
+	 * Main Post_Anonymously_Loader Instance.
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
 	 *
 	 * @since 0.0.1
 	 * @static
-	 * @see Post_Anonymously_For_BuddyBoss_Loader()
-	 * @return Post_Anonymously_For_BuddyBoss_Loader - Main instance.
+	 * @see Post_Anonymously_Loader()
+	 * @return Post_Anonymously_Loader - Main instance.
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {

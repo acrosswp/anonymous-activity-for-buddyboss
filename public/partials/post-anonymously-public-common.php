@@ -8,16 +8,16 @@ defined( 'ABSPATH' ) || exit;
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    Post_Anonymously_For_BuddyBoss
- * @subpackage Post_Anonymously_For_BuddyBoss/public
+ * @package    Post_Anonymously
+ * @subpackage Post_Anonymously/public
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class Post_Anonymously_For_BuddyBoss_Public_Common {
+class Post_Anonymously_Public_Common {
 
     /**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_For_BuddyBoss_Public_Common
+	 * @var Post_Anonymously_Public_Common
 	 * @since 0.0.1
 	 */
 	protected static $_instance = null;
@@ -32,14 +32,14 @@ class Post_Anonymously_For_BuddyBoss_Public_Common {
 	public function __construct() {}
 
     /**
-	 * Main Post_Anonymously_For_BuddyBoss Instance.
+	 * Main Post_Anonymously Instance.
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
 	 *
 	 * @since 0.0.1
 	 * @static
-	 * @see Post_Anonymously_For_BuddyBoss()
-	 * @return Post_Anonymously_For_BuddyBoss - Main instance.
+	 * @see Post_Anonymously()
+	 * @return Post_Anonymously - Main instance.
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -85,7 +85,7 @@ class Post_Anonymously_For_BuddyBoss_Public_Common {
 	 * Remove the User Profile Link
 	 */
 	public function anonymous_user_label() {
-		return __( 'Anonymous Member', 'post-anonymously-for-buddyboss' );
+		return __( 'Anonymous Member', 'post-anonymously' );
 	}
 
 	/**
@@ -152,14 +152,14 @@ class Post_Anonymously_For_BuddyBoss_Public_Common {
 	 * Remove the User Profile Link on activity
 	 */
 	public function anonymous_author_user_label() {
-		return __( ' ( Anonymous Post )', 'post-anonymously-for-buddyboss' );
+		return __( ' ( Anonymous Post )', 'post-anonymously' );
 	}
 
 	/**
 	 * Remove the User Profile Link on activity comment
 	 */
 	public function anonymous_author_user_commnet_label() {
-		return __( ' ( Anonymous Comment )', 'post-anonymously-for-buddyboss' );
+		return __( ' ( Anonymous Comment )', 'post-anonymously' );
 	}
 
 }

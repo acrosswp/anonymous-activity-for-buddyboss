@@ -44,14 +44,14 @@ class AcrossWP_Main_Menu {
 	}
 
 	/**
-	 * Main Post_Anonymously_For_BuddyBoss_Loader Instance.
+	 * Main Post_Anonymously_Loader Instance.
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
 	 *
 	 * @since 0.0.1
 	 * @static
-	 * @see Post_Anonymously_For_BuddyBoss_Loader()
-	 * @return Post_Anonymously_For_BuddyBoss_Loader - Main instance.
+	 * @see Post_Anonymously_Loader()
+	 * @return Post_Anonymously_Loader - Main instance.
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -67,8 +67,8 @@ class AcrossWP_Main_Menu {
      */
     function main_menu() {
         add_menu_page(
-            __( 'AcrossWP', 'post-anonymously-for-buddyboss' ),
-            __( 'AcrossWP', 'post-anonymously-for-buddyboss' ),
+            __( 'AcrossWP', 'post-anonymously' ),
+            __( 'AcrossWP', 'post-anonymously' ),
             'manage_options',
             ACROSSWP_MAIN_MENU,
             array( $this, 'about_acrosswp' )

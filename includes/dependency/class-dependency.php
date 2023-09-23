@@ -2,11 +2,11 @@
 // Exit if accessed directly
 defined( 'ABSPATH' ) || exit;
 
-abstract class Post_Anonymously_For_BuddyBoss_Plugins_Dependency {
+abstract class Post_Anonymously_Plugins_Dependency {
 
     function __construct() {
 
-        add_filter( 'post-anonymously-for-buddyboss-load', array( $this, 'boilerplate_load' ) );
+        add_filter( 'post-anonymously-load', array( $this, 'boilerplate_load' ) );
 
     }
 
@@ -15,7 +15,7 @@ abstract class Post_Anonymously_For_BuddyBoss_Plugins_Dependency {
      */
     public function get_plugin_name() {
 
-        $plugin_data = get_plugin_data( POST_ANONYMOUSLY_FOR_BUDDYBOSS_FILES );
+        $plugin_data = get_plugin_data( POST_ANONYMOUSLY_FILES );
 		return $plugin_data['Name'];
     }
 

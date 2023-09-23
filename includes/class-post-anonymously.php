@@ -11,8 +11,8 @@ defined( 'ABSPATH' ) || exit;
  * @link       https://acrosswp.com
  * @since      0.0.1
  *
- * @package    Post_Anonymously_For_BuddyBoss
- * @subpackage Post_Anonymously_For_BuddyBoss/includes
+ * @package    Post_Anonymously
+ * @subpackage Post_Anonymously/includes
  */
 
 /**
@@ -25,16 +25,16 @@ defined( 'ABSPATH' ) || exit;
  * version of the plugin.
  *
  * @since      0.0.1
- * @package    Post_Anonymously_For_BuddyBoss
- * @subpackage Post_Anonymously_For_BuddyBoss/includes
+ * @package    Post_Anonymously
+ * @subpackage Post_Anonymously/includes
  * @author     AcrossWP <contact@acrosswp.com>
  */
-final class Post_Anonymously_For_BuddyBoss {
+final class Post_Anonymously {
 	
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_For_BuddyBoss
+	 * @var Post_Anonymously
 	 * @since 0.0.1
 	 */
 	protected static $_instance = null;
@@ -45,7 +45,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 *
 	 * @since    0.0.1
 	 * @access   protected
-	 * @var      Post_Anonymously_For_BuddyBoss_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Post_Anonymously_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -80,13 +80,13 @@ final class Post_Anonymously_For_BuddyBoss {
 
 		$this->define_constants();
 
-		if ( defined( 'POST_ANONYMOUSLY_FOR_BUDDYBOSS_VERSION' ) ) {
-			$this->version = POST_ANONYMOUSLY_FOR_BUDDYBOSS_VERSION;
+		if ( defined( 'POST_ANONYMOUSLY_VERSION' ) ) {
+			$this->version = POST_ANONYMOUSLY_VERSION;
 		} else {
 			$this->version = '0.0.1';
 		}
 
-		$this->plugin_name = 'post-anonymously-for-buddyboss';
+		$this->plugin_name = 'post-anonymously';
 
 		$this->load_dependencies();
 
@@ -97,14 +97,14 @@ final class Post_Anonymously_For_BuddyBoss {
 	}
 
 	/**
-	 * Main Post_Anonymously_For_BuddyBoss Instance.
+	 * Main Post_Anonymously Instance.
 	 *
 	 * Ensures only one instance of WooCommerce is loaded or can be loaded.
 	 *
 	 * @since 0.0.1
 	 * @static
-	 * @see Post_Anonymously_For_BuddyBoss()
-	 * @return Post_Anonymously_For_BuddyBoss - Main instance.
+	 * @see Post_Anonymously()
+	 * @return Post_Anonymously - Main instance.
 	 */
 	public static function instance() {
 		if ( is_null( self::$_instance ) ) {
@@ -118,19 +118,19 @@ final class Post_Anonymously_For_BuddyBoss {
 	 */
 	private function define_constants() {
 
-		$this->define( 'POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_FILE', POST_ANONYMOUSLY_FOR_BUDDYBOSS_FILES );
-		$this->define( 'POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_BASENAME', plugin_basename( POST_ANONYMOUSLY_FOR_BUDDYBOSS_FILES ) );
-		$this->define( 'POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH', plugin_dir_path( POST_ANONYMOUSLY_FOR_BUDDYBOSS_FILES ) );
-		$this->define( 'POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_URL', plugin_dir_url( POST_ANONYMOUSLY_FOR_BUDDYBOSS_FILES ) );
+		$this->define( 'POST_ANONYMOUSLY_PLUGIN_FILE', POST_ANONYMOUSLY_FILES );
+		$this->define( 'POST_ANONYMOUSLY_PLUGIN_BASENAME', plugin_basename( POST_ANONYMOUSLY_FILES ) );
+		$this->define( 'POST_ANONYMOUSLY_PLUGIN_PATH', plugin_dir_path( POST_ANONYMOUSLY_FILES ) );
+		$this->define( 'POST_ANONYMOUSLY_PLUGIN_URL', plugin_dir_url( POST_ANONYMOUSLY_FILES ) );
 		
 		if( ! function_exists( 'get_plugin_data' ) ){
 			require_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}
-		$plugin_data = get_plugin_data( POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_FILE );
+		$plugin_data = get_plugin_data( POST_ANONYMOUSLY_PLUGIN_FILE );
 		$version = $plugin_data['Version'];
-		$this->define( 'POST_ANONYMOUSLY_FOR_BUDDYBOSS_VERSION', $version );
+		$this->define( 'POST_ANONYMOUSLY_VERSION', $version );
 
-		$this->define( 'POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_URL', $version );
+		$this->define( 'POST_ANONYMOUSLY_PLUGIN_URL', $version );
 	}
 
 	/**
@@ -159,7 +159,7 @@ final class Post_Anonymously_For_BuddyBoss {
 		 * 
 		 * @since    0.0.1
 		 */
-		if( apply_filters( 'post-anonymously-for-buddyboss-load', true ) ) {
+		if( apply_filters( 'post-anonymously-load', true ) ) {
 			
 			$this->define_public_hooks();
 		}
@@ -171,10 +171,10 @@ final class Post_Anonymously_For_BuddyBoss {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Post_Anonymously_For_BuddyBoss_Loader. Orchestrates the hooks of the plugin.
-	 * - Post_Anonymously_For_BuddyBoss_i18n. Defines internationalization functionality.
-	 * - Post_Anonymously_For_BuddyBoss_Admin. Defines all hooks for the admin area.
-	 * - Post_Anonymously_For_BuddyBoss_Public. Defines all hooks for the public side of the site.
+	 * - Post_Anonymously_Loader. Orchestrates the hooks of the plugin.
+	 * - Post_Anonymously_i18n. Defines internationalization functionality.
+	 * - Post_Anonymously_Admin. Defines all hooks for the admin area.
+	 * - Post_Anonymously_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -188,13 +188,13 @@ final class Post_Anonymously_For_BuddyBoss {
 		 * The class responsible for loading the dependency main class
 		 * core plugin.
 		 */
-		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'includes/dependency/class-dependency.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'includes/dependency/class-dependency.php';
 
 		/**
 		 * The class responsible for loading the dependency main class
 		 * core plugin.
 		 */
-		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'includes/dependency/buddyboss.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'includes/dependency/buddyboss.php';
 
 
 		/**
@@ -205,7 +205,7 @@ final class Post_Anonymously_For_BuddyBoss {
 			 * The class responsible for loading the dependency main class
 			 * core plugin.
 			 */
-			require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'admin/integration/acrosswp-menu.php';
+			require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'admin/integration/acrosswp-menu.php';
 			AcrossWP_Main_Menu::instance();
 		}	
 
@@ -220,7 +220,7 @@ final class Post_Anonymously_For_BuddyBoss {
 			 * The class responsible for loading the dependency main class
 			 * core plugin.
 			 */
-			require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'admin/licenses/across-menu-license.php';
+			require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'admin/licenses/across-menu-license.php';
 			AcrossWP_Main_Menu_Licenses::instance();
 		}
 
@@ -228,28 +228,28 @@ final class Post_Anonymously_For_BuddyBoss {
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'includes/class-post-anonymously-for-buddyboss-loader.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'includes/class-post-anonymously-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'includes/class-post-anonymously-for-buddyboss-i18n.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'includes/class-post-anonymously-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once POST_ANONYMOUSLY_FOR_BUDDYBOSS_PLUGIN_PATH . 'public/class-post-anonymously-for-buddyboss-public.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/class-post-anonymously-public.php';
 
-		$this->loader = Post_Anonymously_For_BuddyBoss_Loader::instance();
+		$this->loader = Post_Anonymously_Loader::instance();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Post_Anonymously_For_BuddyBoss_i18n class in order to set the domain and to register the hook
+	 * Uses the Post_Anonymously_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    0.0.1
@@ -257,7 +257,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Post_Anonymously_For_BuddyBoss_i18n();
+		$plugin_i18n = new Post_Anonymously_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -271,7 +271,7 @@ final class Post_Anonymously_For_BuddyBoss {
 			'id' 		=> 705,
 			'key' 		=> $this->plugin_name,
 			'version'	=> $this->version,
-			'name' 		=> 'Post Anonymously For BuddyBoss'
+			'name' 		=> 'Post Anonymously'
 		);
 
 		return $licenses;
@@ -286,7 +286,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Post_Anonymously_For_BuddyBoss_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Post_Anonymously_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts', -1 );
 
@@ -318,7 +318,7 @@ final class Post_Anonymously_For_BuddyBoss {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     0.0.1
-	 * @return    Post_Anonymously_For_BuddyBoss_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Post_Anonymously_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;
