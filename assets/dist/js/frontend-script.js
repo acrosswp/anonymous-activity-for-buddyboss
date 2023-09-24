@@ -15,8 +15,15 @@ bp.Views.FormSubmit = bp.Views.FormSubmit.extend({
           value: '1'
       });
 
+      var checkboxMain = document.createElement('div');
+      checkboxMain.classList.add('anonymously-post-main');
+
+      var checkboxLabel = document.createElement('label');
+      checkboxLabel.textContent = 'Post anonymously';
+      checkboxMain.appendChild(checkboxLabel);
+      
       var checkboxWrapper = document.createElement('div');
-      checkboxWrapper.classList.add('anonymously-post-wrap'); 
+      checkboxWrapper.classList.add('anonymously-post-wrap');
       
       checkboxWrapper.appendChild(this.checkbox.el);
       
@@ -28,8 +35,10 @@ bp.Views.FormSubmit = bp.Views.FormSubmit.extend({
       checkboxlayer.classList.add('anonymously-post-layer'); 
       checkboxWrapper.appendChild(checkboxlayer);
 
+      checkboxMain.appendChild(checkboxWrapper);
 
-      this.checkbox.el = checkboxWrapper;
+
+      this.checkbox.el = checkboxMain;
 
       this.views.set( [ this.submit, this.reset, this.discard, this.checkbox ] );
   }
