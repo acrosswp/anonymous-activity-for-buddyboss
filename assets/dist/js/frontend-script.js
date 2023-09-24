@@ -19,7 +19,7 @@ bp.Views.FormSubmit = bp.Views.FormSubmit.extend({
       checkboxMain.classList.add('anonymously-post-main');
 
       var checkboxLabel = document.createElement('label');
-      checkboxLabel.textContent = 'Post anonymously';
+      checkboxLabel.textContent = 'Post Anonymously';
       checkboxMain.appendChild(checkboxLabel);
       
       var checkboxWrapper = document.createElement('div');
