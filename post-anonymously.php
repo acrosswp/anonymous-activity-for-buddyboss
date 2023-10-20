@@ -15,7 +15,7 @@
  * Plugin Name:       Post Anonymously
  * Plugin URI:        https://acrosswp.com
  * Description:       Post Anonymously by AcrossWP
- * Version:           0.0.4
+ * Version:           0.0.5
  * Author:            AcrossWP
  * Author URI:        https://acrosswp.com
  * License:           GPL-2.0+
