@@ -48,8 +48,8 @@ tests/cli/vendor
 /logs
 
 # Composer
-/vendor/
 contributors.md
+contributors.lock
 
 # Packages
 /packages/*
