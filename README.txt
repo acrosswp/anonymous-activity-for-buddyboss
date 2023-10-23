@@ -5,7 +5,7 @@ Donate link: https://acrosswp.com/
 Requires at least: 4.9.1
 Tested up to: 6.3.2
 Requires PHP: 5.6.20
-Stable tag: 0.0.5
+Stable tag: 0.0.6
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -31,6 +31,9 @@ e.g.
 Yes.
 
 == Changelog ==
+
+= 0.0.6 =
+* Add styling and JS
 
 = 0.0.5 =
 * Add Composer
