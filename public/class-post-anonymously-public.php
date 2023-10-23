@@ -132,8 +132,9 @@ class Post_Anonymously_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
-
-		// wp_enqueue_style( $this->plugin_name, POST_ANONYMOUSLY_PLUGIN_URL . 'assets/dist/css/frontend-style.css', array(), $this->version, 'all' );
+		if( bp_is_groups_component() ) {
+			wp_enqueue_style( $this->plugin_name, POST_ANONYMOUSLY_PLUGIN_URL . 'assets/dist/css/frontend-style.css', array(), $this->version, 'all' );
+		}
 
 	}
 

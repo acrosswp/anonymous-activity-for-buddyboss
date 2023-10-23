@@ -10,12 +10,17 @@ var custom_module = {
   module: {
     rules: [
       {
-        test: /\.css$/i,
-        use: [MiniCssExtractPlugin.loader, "css-loader"],
-      },
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader'
+        ]
+      }
     ],
   },
 };
+
 
 var script_output = {
   output: {
@@ -24,12 +29,11 @@ var script_output = {
 		chunkFilename: '[name].js',
   },
 };
-
 var style_output = {
   output: {
     path: path.resolve( process.cwd(), 'assets/dist', 'css' ),
-		filename: '[name].css',
-		chunkFilename: '[name].css',
+		filename: '[name].[contenthash].css',
+    chunkFilename: '[name].[contenthash].css',
   },
 };
 
@@ -40,6 +44,7 @@ var frontend_script = Object.assign({}, script_output, {
       ],
   },
 });
+
 
 var frontend_style = Object.assign({}, custom_module, style_output, {
   entry: {
@@ -62,5 +67,6 @@ wpPot( {
 
 // Return Array of Configurations
 module.exports = [
+  frontend_style,
   frontend_script
 ];
