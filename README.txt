@@ -1,6 +1,6 @@
 === Post Anonymously ===
 Contributors: acrosswp, raftaar1191
-Tags: buddypress, buddyboss-platform, post-anonymously, post-anonymously, buddyboss, platform, platform-pro
+Tags: post-anonymously,buddyboss,buddypress,buddyboss-platform,anonymously-post,buddypress,platform,platform-pro
 Donate link: https://acrosswp.com/
 Requires at least: 6.0
 Tested up to: 6.3
@@ -52,10 +52,6 @@ Example 2:
 1. Upload the plugin files to the `/wp-content/plugins/post-anonymously` directory, or install the plugin through the WordPress plugins screen directly.
 2. Activate the plugin through the 'Plugins' screen in WordPress
 3. (Make your instructions match the desired user flow for activating and installing your plugin. Include any steps that might be needed for explanatory purposes)
-
-= Support Old version of BuddyBoss =
-
-Yes.
 
 == Changelog ==
 
