@@ -3,7 +3,7 @@
         'name' => 'acrosswp/wordpress-plugin-boilerplate',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => 'a1adefb6e5005ad223267a6aa8287ba3ebbee965',
+        'reference' => '7b82d66c4f3ea84609938bc9cd0b5f3f56efe7ed',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -24,7 +24,7 @@
         'acrosswp/wordpress-plugin-boilerplate' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => 'a1adefb6e5005ad223267a6aa8287ba3ebbee965',
+            'reference' => '7b82d66c4f3ea84609938bc9cd0b5f3f56efe7ed',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -33,7 +33,7 @@
         'yahnis-elsts/plugin-update-checker' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => '0f7296123e9ddf303d6da5f968e04ba7899fa88d',
+            'reference' => '00774ef3d9a2a3dfd8ac040b0dcdf5e42126a708',
             'type' => 'library',
             'install_path' => __DIR__ . '/../yahnis-elsts/plugin-update-checker',
             'aliases' => array(

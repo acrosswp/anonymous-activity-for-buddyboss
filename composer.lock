@@ -55,12 +55,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/YahnisElsts/plugin-update-checker.git",
-                "reference": "0f7296123e9ddf303d6da5f968e04ba7899fa88d"
+                "reference": "00774ef3d9a2a3dfd8ac040b0dcdf5e42126a708"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/YahnisElsts/plugin-update-checker/zipball/0f7296123e9ddf303d6da5f968e04ba7899fa88d",
-                "reference": "0f7296123e9ddf303d6da5f968e04ba7899fa88d",
+                "url": "https://api.github.com/repos/YahnisElsts/plugin-update-checker/zipball/00774ef3d9a2a3dfd8ac040b0dcdf5e42126a708",
+                "reference": "00774ef3d9a2a3dfd8ac040b0dcdf5e42126a708",
                 "shasum": ""
             },
             "require": {
@@ -98,7 +98,7 @@
                 "issues": "https://github.com/YahnisElsts/plugin-update-checker/issues",
                 "source": "https://github.com/YahnisElsts/plugin-update-checker/tree/master"
             },
-            "time": "2023-08-23T17:26:40+00:00"
+            "time": "2023-10-20T13:40:52+00:00"
         }
     ],
     "packages-dev": [],
