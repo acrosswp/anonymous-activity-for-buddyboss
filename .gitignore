@@ -53,3 +53,5 @@ contributors.lock
 
 # Language files
 i18n/languages/woocommerce.pot
+
+/assets/dist/css/backend-style.\*.css
