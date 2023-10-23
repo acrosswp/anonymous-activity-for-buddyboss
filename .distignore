@@ -12,4 +12,4 @@ README.md
 webpack-config.js
 .travis.yml
 
-/assets/dist/css/backend-style.\*.css
+/assets/dist/css/frontend-style.\*.css
