@@ -158,6 +158,11 @@ class Post_Anonymously_Public {
 		 */
 		if( bp_is_groups_component() ) {
 			wp_enqueue_script( $this->plugin_name, POST_ANONYMOUSLY_PLUGIN_URL . 'assets/dist/js/frontend-script.js', array( 'bp-nouveau-activity-post-form' ), $this->version, true );
+			wp_localize_script( $this->plugin_name, 'paf',
+				array( 
+					'post_anonymously_label' => apply_filters( 'post_anonymously_label', __( 'Post Anonymously', 'post-anonymously' ) ),
+				)
+			);
 		}
 
 	}
