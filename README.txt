@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 == Description ==
 
-https://www.youtube.com/watch?v=QfwOv1Nsiow
+https://www.youtube.com/watch?v=v3CeOChEOKc
 
 The "Post Anonymously" plugin is a groundbreaking addition to your BuddyBoss platform, revolutionizing user interactions within BuddyBoss Groups. This innovative plugin empowers users to post messages, thoughts, and feedback without revealing their identity, fostering open and honest communication within your community.
 
@@ -46,7 +46,7 @@ This section describes how to install the plugin and get it working.
 
 Example 1:
 
-https://www.youtube.com/watch?v=AChIt2MUuwQ
+https://www.youtube.com/watch?v=abIm0LZu8XQ
 
 Example 2:
 1. Upload the plugin files to the `/wp-content/plugins/post-anonymously` directory, or install the plugin through the WordPress plugins screen directly.
