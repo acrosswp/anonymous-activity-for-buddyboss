@@ -1,0 +1,27 @@
+{
+    "name": "wpboilerplate/wpb-buddyboss-dependency",
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "description": "Composer to autoload the AcrossWP Dependency Class",
+    "homepage": "https://github.com/WPBoilerplate/wpb-buddyboss-dependency",
+    "keywords": [
+        "wordpress",
+        "plugin"
+    ],
+    "autoload": {
+        "files": ["index.php"]
+    },
+    "support": {
+        "issues": "https://github.com/WPBoilerplate/wpb-buddyboss-dependency/issues"
+    },
+    "require": {
+        "wpboilerplate/wpb-dependency": "dev-main"
+    },
+    "authors": [
+        {
+            "name": "WPBoilerplate"
+        }
+    ],
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

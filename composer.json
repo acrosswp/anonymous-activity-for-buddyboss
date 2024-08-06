@@ -1,0 +1,25 @@
+{
+    "name": "acrosswp/post-anonymously",
+    "type": "library",
+    "license": "GPL-2.0-or-later",
+    "description": "Post Anonymously in Activity Areas of BuddyBoss Platform",
+    "homepage": "https://acrosswp.com/",
+    "minimum-stability": "dev",
+    "keywords": [
+        "wordpress",
+        "plugin"
+    ],
+    "require": {
+        "wpboilerplate/wpb-updater-checker-github": "dev-main",
+        "wpboilerplate/wpb-buddyboss-dependency": "dev-main"
+    },
+    "support": {
+        "issues": "https://github.com/acrosswp/post-anonymously/issues"
+    },
+    "authors": [
+        {
+            "name": "acrosswp",
+            "email": "contant@acrosswp.com"
+        }
+    ]
+}
