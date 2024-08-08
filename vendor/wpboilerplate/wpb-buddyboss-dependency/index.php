@@ -28,7 +28,7 @@ if ( ! class_exists( 'WPBoilerplate_BuddyBoss_Platform_Dependency' ) ) {
 		 *
 		 * @since    0.0.1
 		 */
-		public function __construct( $plugin_name, $plugin_files, $mini_version = '2.3.0', $component_required = array() ) {
+		public function __construct( $plugin_name, $plugin_files, $mini_version = '2.6.70', $component_required = array() ) {
 
             $this->plugin_name          = $plugin_name;
             $this->plugin_files         = $plugin_files;

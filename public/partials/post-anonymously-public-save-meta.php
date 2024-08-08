@@ -133,6 +133,9 @@ class Post_Anonymously_Public_Save_Meta {
 		if ( ! empty( $_REQUEST['anonymously-post'] ) ) {
 			bp_activity_update_meta( $activity_id, 'anonymously-post', 1 );
 			bp_activity_update_meta( $activity_id, 'anonymously-post-group-id', $group_id );
+		} else {
+			bp_activity_delete_meta( $activity_id, 'anonymously-post' );
+			bp_activity_delete_meta( $activity_id, 'anonymously-post-group-id' );
 		}
 	}
 }

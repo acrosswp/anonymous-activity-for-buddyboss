@@ -93,7 +93,7 @@ class Post_Anonymously_Public_Render_Activity_Comments {
 		) {
 
 			$activity = $this->_functions->get_activity();
-			if( empty( $this->_functions->show_anonymously_users( $activity->user_id, $activity->item_id ) ) ) {
+			if ( empty( $this->_functions->show_anonymously_users( $activity->user_id, $activity->item_id ) ) ) {
 				/**
 				 * For User Link on the Avatar
 				 */
@@ -164,7 +164,7 @@ class Post_Anonymously_Public_Render_Activity_Comments {
 	public function activity_comment_name( $name ) {
 		
 		$activity = $this->_functions->get_activity();
-		if( $this->_functions->show_anonymously_users( $activity->user_id, $activity->item_id ) ) {
+		if ( $this->_functions->show_anonymously_users( $activity->user_id, $activity->item_id ) ) {
 			$name .= $this->_functions->anonymous_author_user_commnet_label();
 		} else {
 			$name = $this->_functions->anonymous_user_label();

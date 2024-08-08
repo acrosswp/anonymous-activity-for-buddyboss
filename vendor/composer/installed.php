@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'acrosswp/post-anonymously',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => null,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '2f65594abe299f8cfd379dc8db00bb1a3fd0f924',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -11,9 +11,9 @@
     ),
     'versions' => array(
         'acrosswp/post-anonymously' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => null,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '2f65594abe299f8cfd379dc8db00bb1a3fd0f924',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -22,7 +22,7 @@
         'wpboilerplate/wpb-buddyboss-dependency' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '52e377751c6f6c6dc99a3dfc35bf566aa7da8459',
+            'reference' => '0d2b04e3fc111f14a4bd7aba3d6f7bdab5c4f6df',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wpboilerplate/wpb-buddyboss-dependency',
             'aliases' => array(
@@ -44,7 +44,7 @@
         'wpboilerplate/wpb-updater-checker-github' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '25041389a843dac7aaea4de8f2a18fe9e09bd10c',
+            'reference' => '0bbdbd161e43352d01e1dd13db308a05ebaf5afa',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wpboilerplate/wpb-updater-checker-github',
             'aliases' => array(

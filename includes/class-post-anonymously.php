@@ -222,7 +222,8 @@ final class Post_Anonymously {
 				'repo' 		        => 'https://github.com/acrosswp/post-anonymously',
 				'file_path' 		=> POST_ANONYMOUSLY_FILES,
 				'name_slug'			=> POST_ANONYMOUSLY_PLUGIN_NAME_SLUG,
-				'release_branch' 	=> 'main'
+				'release_branch' 	=> 'main',
+				'release-assets' 	=> true
 			);
 
 			new WPBoilerplate_Updater_Checker_Github( $package );
