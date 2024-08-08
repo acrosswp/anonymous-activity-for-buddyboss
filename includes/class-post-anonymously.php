@@ -265,11 +265,6 @@ final class Post_Anonymously {
 		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'admin/class-post-anonymously-admin.php';
 
 		/**
-		 * The class responsible for defining the plugin menu
-		 */
-		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'admin/partials/post-anonymously-main-menu.php';
-
-		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
@@ -311,12 +306,6 @@ final class Post_Anonymously {
 		
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 
-		/**
-		 * Add the Plugin Main Menu
-		 */
-		$main_menu = new Post_Anonymously_Main_Menu( $this->get_plugin_name(), $this->get_version() );
-		$this->loader->add_action( 'admin_menu', $main_menu, 'main_menu' );
-		$this->loader->add_action( 'plugin_action_links', $main_menu, 'plugin_action_links', 1000, 2 );
 	}
 
 	/**
