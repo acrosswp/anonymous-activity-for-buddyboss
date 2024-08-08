@@ -27,7 +27,7 @@ class Post_Anonymously_Public {
 	/**
 	 * The ID of this plugin.
 	 *
-	 * @since    0.0.1
+	 * @since    1.0.0
 	 * @access   private
 	 * @var      string    $plugin_name    The ID of this plugin.
 	 */
@@ -36,11 +36,30 @@ class Post_Anonymously_Public {
 	/**
 	 * The version of this plugin.
 	 *
-	 * @since    0.0.1
+	 * @since    1.0.0
 	 * @access   private
 	 * @var      string    $version    The current version of this plugin.
 	 */
 	private $version;
+
+	/**
+	 * The js_asset_file of the frontend
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $js_asset_file;
+
+	/**
+	 * The css_asset_file of the frontend
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $css_asset_file;
+
 
 	/**
 	 * Initialize the class and set its properties.
@@ -53,6 +72,9 @@ class Post_Anonymously_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+
+		$this->js_asset_file	= include( POST_ANONYMOUSLY_PLUGIN_PATH . 'build/js/frontend.asset.php' );
+		$this->css_asset_file	= include( POST_ANONYMOUSLY_PLUGIN_PATH . 'build/css/frontend.asset.php' );
 	}
 
 	/**
@@ -133,7 +155,7 @@ class Post_Anonymously_Public {
 		 * class.
 		 */
 		if ( bp_is_groups_component() ) {
-			wp_enqueue_style( $this->plugin_name, POST_ANONYMOUSLY_PLUGIN_URL . 'assets/dist/css/frontend-style.css', array(), $this->version, 'all' );
+			wp_enqueue_style( $this->plugin_name, POST_ANONYMOUSLY_PLUGIN_URL . 'build/css/frontend.css', $this->css_asset_file['dependencies'], $this->css_asset_file['version'], 'all' );
 		}
 
 	}
@@ -157,7 +179,11 @@ class Post_Anonymously_Public {
 		 * class.
 		 */
 		if ( bp_is_groups_component() ) {
-			wp_enqueue_script( $this->plugin_name, POST_ANONYMOUSLY_PLUGIN_URL . 'assets/dist/js/frontend-script.js', array( 'bp-nouveau-activity-post-form' ), $this->version, true );
+
+			$this->js_asset_file['dependencies'][] = 'bp-nouveau-activity-post-form';
+
+			wp_enqueue_script( $this->plugin_name, POST_ANONYMOUSLY_PLUGIN_URL . 'build/js/frontend.js', $this->js_asset_file['dependencies'], $this->js_asset_file['version'], true );
+
 			wp_localize_script( $this->plugin_name, 'paf',
 				array( 
 					'post_anonymously_label' => apply_filters( 'post_anonymously_label', __( 'Post Anonymously', 'post-anonymously' ) ),

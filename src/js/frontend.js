@@ -1,9 +1,11 @@
 // Define your custom Backbone view for the checkbox// Extend bp.Views.FormSubmit
 bp.Views.FormSubmit = bp.Views.FormSubmit.extend({
-    initialize: function() {
-        // Call the original initialize function
-        bp.Views.FormSubmit.__super__.initialize.apply(this, arguments);
-  
+
+    render: function(){
+        this.$el.append( this.renderCheckbox() );
+    },
+
+    renderCheckbox: function() {
         // Create and append the checkbox
         this.checkbox = new bp.Views.ActivityInput({
             type: 'checkbox',
@@ -34,10 +36,6 @@ bp.Views.FormSubmit = bp.Views.FormSubmit.extend({
         checkboxWrapper.appendChild(checkboxlayer);
   
         checkboxMain.appendChild(checkboxWrapper);
-  
-  
-        this.checkbox.el = checkboxMain;
-  
-        this.views.set( [ this.submit, this.reset, this.discard, this.checkbox ] );
+        return this.checkbox.el = checkboxMain;
     }
 });
