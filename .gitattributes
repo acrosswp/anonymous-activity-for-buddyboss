@@ -5,6 +5,8 @@
 
 /node_modules export-ignore
 
+/src export-ignore
+
 ..gitattributes export-ignore
 .distignore export-ignore
 .gitignore export-ignore

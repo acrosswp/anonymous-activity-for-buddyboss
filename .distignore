@@ -4,6 +4,7 @@
 /.github
 
 /node_modules
+/src
 
 ..gitattributes
 .distignore

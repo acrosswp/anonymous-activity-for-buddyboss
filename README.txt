@@ -4,8 +4,8 @@ Tags: post-anonymously,buddyboss,buddypress,buddyboss-platform,anonymously-post,
 Donate link: https://acrosswp.com/
 Requires at least: 6.0
 Tested up to: 6.3
-Stable tag: 0.0.8
-Requires PHP: 5.6.20
+Stable tag: 0.0.9
+Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -54,6 +54,10 @@ Example 2:
 3. (Make your instructions match the desired user flow for activating and installing your plugin. Include any steps that might be needed for explanatory purposes)
 
 == Changelog ==
+
+= 0.0.8 =
+* Fix Github Issue 3
+* Fix button not showing with the latest version of BuddyBoss Platform
 
 = 0.0.8 =
 * Fix Github Issue 1
