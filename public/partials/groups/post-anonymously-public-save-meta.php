@@ -91,8 +91,9 @@ class Post_Anonymously_Public_Save_Meta_Groups {
 
 		/**
 		 * Add post meta into the Activity Meta
+		 * Remove this in future
 		 */
-		add_action( 'bp_activity_posted_update', array( $this, 'activity_posted_update' ), 1000, 3 );
+		// add_action( 'bp_activity_posted_update', array( $this, 'activity_posted_update' ), 1000, 3 );
 
 
 		/**
@@ -101,6 +102,36 @@ class Post_Anonymously_Public_Save_Meta_Groups {
 		add_action( 'bp_activity_comment_posted', array( $this, 'activity_comment_posted' ), 1000, 3 );
 		add_action( 'bp_activity_comment_posted_notification_skipped', array( $this, 'activity_comment_posted' ), 1000, 3 );
 
+		/**
+		 * Stop email for the groups new activity of anonymou post.
+		 */
+		add_action( 'bp_send_email', array( $this, 'email_sending' ), 1000, 4 );
+
+	}
+
+	/**
+	 * Do not send email for the anonymou post in groups
+	 */
+	public function email_sending( $email, $email_type, $to, $args ) {
+
+		if ( 'groups-new-activity' != $email_type ) {
+			return;
+		}
+
+		if ( ! isset( $args['tokens']['activity'] ) ) {
+			return;
+		}
+
+		$activity = $args['tokens']['activity'];
+		if ( ! isset( $activity->id ) ) {
+			return;
+		}
+
+		if ( ! $this->_functions->is_anonymously_activity( $activity->id )  ) {
+			return;
+		}
+
+		$email->set_to( '' );
 	}
 
 	/**
