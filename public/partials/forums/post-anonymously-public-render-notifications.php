@@ -12,12 +12,30 @@ defined( 'ABSPATH' ) || exit;
  * @subpackage Post_Anonymously/public
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class Post_Anonymously_Public_Render_Notifications {
+class Post_Anonymously_Public_Render_Forums_Notifications {
+
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
+
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $version;
 
     /**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_Public_Render_Notifications
+	 * @var Post_Anonymously_Public_Render_Forums_Notifications
 	 * @since 0.0.1
 	 */
 	protected static $_instance = null;
@@ -25,7 +43,7 @@ class Post_Anonymously_Public_Render_Notifications {
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_Public_Render_Notifications
+	 * @var Post_Anonymously_Public_Render_Forums_Notifications
 	 * @since 0.0.1
 	 */
 	protected $_functions = null;
@@ -37,9 +55,11 @@ class Post_Anonymously_Public_Render_Notifications {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct() {
+	public function __construct( $plugin_name, $version ) {
 
-		$this->_functions = Post_Anonymously_Public_Common::instance();
+		$this->plugin_name = $plugin_name;
+		$this->version = $version;
+		$this->_functions = Post_Anonymously_Public_Common::instance( $plugin_name, $version );
 
 	}
 
@@ -53,9 +73,9 @@ class Post_Anonymously_Public_Render_Notifications {
 	 * @see Post_Anonymously()
 	 * @return Post_Anonymously - Main instance.
 	 */
-	public static function instance() {
+	public static function instance( $plugin_name, $version ) {
 		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
+			self::$_instance = new self( $plugin_name, $version );
 		}
 		return self::$_instance;
 	}
@@ -66,77 +86,84 @@ class Post_Anonymously_Public_Render_Notifications {
 	public function hooks() {
 
 		/**
-		 * Hook to hide the author name in the notifications for activity
+		 * Hook to hide the author name in the notifications for discussion
 		 */
-		add_filter( 'bb_groups_single_bb_groups_subscribed_activity_notification', array( $this, 'group_activity_notification' ), 1000, 5 );
+		add_filter( 'bp_get_the_notification_description', array( $this, 'topic_notification' ), 1, 2 );
 
-		/**
-		 * Hook to hide the author name in the notifications for activity comment
-		 */
-		add_filter( 'bp_activity_bb_activity_comment_notification', array( $this, 'activity_comment_notification' ), 1000, 7 );
+		add_filter( 'bp_get_the_notification_description', array( $this, 'reply_notification' ), 1, 2 );
 
 
 		add_action( 'notifications_loop_start', array( $this, 'notifications_loop_start' ) );
 
-
 		add_action( 'notifications_loop_end', array( $this, 'notifications_loop_end' ) );
+
 	}
 
 	/**
-	 * Update the activity notification
+	 * Update the discussion notification
 	 */
-	function group_activity_notification( $content, $notification, $notification_link, $text, $screen ) {
+	public function topic_notification( $description, $notification ) {
 
 		/**
 		 * If this is for notifications only
 		 */
-		if( in_array( $screen, array( 'web', 'web_push' ) ) ) {
-			$activity_id 		= $notification->item_id;
-			$activity_user_id 	= $notification->secondary_item_id;
-			$group_id 			= bp_activity_get_meta( $activity_id, 'anonymously-post-group-id' );
-
-			/**
-			 * Check if the post is a anonymously or not
-			 */
-			if ( $this->_functions->show_anonymously_users( $activity_user_id, $group_id ) ) {
-				
-				$user_fullname = bp_core_get_user_displayname( $notification->secondary_item_id );
-
-				$content['text'] = str_replace( $user_fullname, $user_fullname . ' ' .$this->_functions->anonymous_author_user_commnet_label(), $content['text'] );
-
-			} elseif( $this->_functions->is_anonymously_activity( $activity_id ) ) {
-
-				$user_fullname = bp_core_get_user_displayname( $notification->secondary_item_id );
-
-				$content['text'] = str_replace( $user_fullname, $this->_functions->anonymous_user_label(), $content['text'] );
-			}
+		if ( 'groups' !== $notification->component_name ) {
+			return $description;
 		}
 
-		return $content;
+		if ( 'bb_groups_subscribed_discussion' !== $notification->component_action ) {
+			return $description;
+		}
+
+		return $this->content_update( $description, $notification );
 	}
 
 	/**
-	 * Update the activity notification
+	 * Update the discussion notification
 	 */
-	function activity_comment_notification( $content, $item_id, $secondary_item_id, $total_items, $format, $notification_id, $screen ) {
+	public function reply_notification( $description, $notification ) {
 
 		/**
 		 * If this is for notifications only
 		 */
-		if( in_array( $screen, array( 'web', 'web_push' ) ) ) {
-
-			/**
-			 * Check if the post is a anonymously or not
-			 */
-			if( $this->_functions->is_anonymously_activity( $item_id ) ) {
-
-				$user_fullname = bp_core_get_user_displayname( $secondary_item_id );
-
-				$content = str_replace( $user_fullname, $this->_functions->anonymous_user_label(), $content );
-			}
+		if ( 'forums' !== $notification->component_name ) {
+			return $description;
 		}
 
-		return $content;
+		if ( 'bbp_new_reply' !== $notification->component_action ) {
+			return $description;
+		}
+
+		return $this->content_update( $description, $notification );
+	}
+
+	public function content_update( $description, $notification ) {
+		$post_id = $notification->item_id;
+
+		/**
+		 * Check if the post is a anonymously or not
+		 */
+		if ( $this->_functions->show_post_anonymously_users( $post_id ) ) {
+			
+			$user_fullname = bp_core_get_user_displayname( $notification->secondary_item_id );
+
+			$description = str_replace( $user_fullname, $user_fullname . ' ' .$this->_functions->anonymous_author_user_commnet_label(), $description );
+
+			return $description;
+		}
+
+
+		if ( $this->_functions->is_anonymously_post( $post_id ) ) {
+
+			$user_fullname = bp_core_get_user_displayname( $notification->secondary_item_id );
+
+			$description = str_replace( $user_fullname, $this->_functions->anonymous_user_label(), $description );
+
+			return $description;
+		}
+
+		return $description;
+
 	}
 
 	/**
@@ -177,13 +204,12 @@ class Post_Anonymously_Public_Render_Notifications {
 		remove_filter( 'bp_core_fetch_avatar_url_check', array( $this, 'notifications_user_avatar_url' ), 100 );
 	}
 
-
 	/**
 	 * Change the link into the notification area
 	 */
 	public function notifications_user_domain( $domain, $user_id, $user_nicename, $user_login ) {
 
-		if( $this->is_anonymously_notifications( $user_id ) ) {
+		if ( $this->is_anonymously_notifications( $user_id ) ) {
 			$domain = '';
 		}
 
@@ -195,14 +221,12 @@ class Post_Anonymously_Public_Render_Notifications {
 	 */
 	public function notifications_user_avatar_url( $avatar_url, $params ) {
 
-		if( ! empty( $params['item_id'] ) && $this->is_anonymously_notifications( $params['item_id'] ) ) {
+		if ( ! empty( $params['item_id'] ) && $this->is_anonymously_notifications( $params['item_id'] ) ) {
 			$avatar_url = '';
 		}
 
 		return $avatar_url;
 	}
-
-
 
 	/**
 	 * Check if the current notification is the anonymously or not
@@ -218,25 +242,23 @@ class Post_Anonymously_Public_Render_Notifications {
 			$component        	= $notification->component_name;
 			$component_action	= $notification->component_action;
 			$activity_user_id 	= $notification->secondary_item_id;
-			
+
 			if( 
-				( 'groups' == $component && 'bb_groups_subscribed_activity' == $component_action )
-				|| ( 'activity' == $component && 'bb_activity_comment' == $component_action )
+				( 'forums' == $component && 'bbp_new_reply' == $component_action )
+				|| ( 'groups' == $component && 'bb_groups_subscribed_discussion' == $component_action )
 			) {
 
 				/**
 				 * For Normal Activity notification
 				 */
-				$activity_id 		= $notification->item_id;
+				$post_id 		= $notification->item_id;
 				$activity_user_id 	= $notification->secondary_item_id;
-				$group_id 			= bp_activity_get_meta( $activity_id, 'anonymously-post-group-id' );
 
 				if( 
 					$activity_user_id 
-					&& $group_id 
-					&& empty( $this->_functions->show_anonymously_users( $activity_user_id, $group_id ) )
+					&& empty( $this->_functions->show_post_anonymously_users( $post_id ) )
 				) {
-					if( $this->_functions->is_anonymously_activity( $activity_id ) ) {
+					if( $this->_functions->is_anonymously_post( $post_id ) ) {
 						$value =  true;
 					}
 				}

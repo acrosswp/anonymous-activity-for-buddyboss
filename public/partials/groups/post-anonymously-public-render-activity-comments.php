@@ -12,12 +12,30 @@ defined( 'ABSPATH' ) || exit;
  * @subpackage Post_Anonymously/public
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class Post_Anonymously_Public_Render_Activity_Comments {
+class Post_Anonymously_Public_Render_Groups_Activity_Comments {
+
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
+
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $version;
 
     /**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_Public_Render_Activity_Comments
+	 * @var Post_Anonymously_Public_Render_Groups_Activity_Comments
 	 * @since 0.0.1
 	 */
 	protected static $_instance = null;
@@ -25,7 +43,7 @@ class Post_Anonymously_Public_Render_Activity_Comments {
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_Public_Render_Activity_Comments
+	 * @var Post_Anonymously_Public_Render_Groups_Activity_Comments
 	 * @since 0.0.1
 	 */
 	protected $_functions = null;
@@ -37,9 +55,11 @@ class Post_Anonymously_Public_Render_Activity_Comments {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct() {
+	public function __construct( $plugin_name, $version ) {
 
-		$this->_functions = Post_Anonymously_Public_Common::instance();
+		$this->plugin_name = $plugin_name;
+		$this->version = $version;
+		$this->_functions = Post_Anonymously_Public_Common::instance( $plugin_name, $version );
 
 	}
 
@@ -53,9 +73,9 @@ class Post_Anonymously_Public_Render_Activity_Comments {
 	 * @see Post_Anonymously()
 	 * @return Post_Anonymously - Main instance.
 	 */
-	public static function instance() {
+	public static function instance( $plugin_name, $version ) {
 		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
+			self::$_instance = new self( $plugin_name, $version );
 		}
 		return self::$_instance;
 	}
@@ -93,7 +113,7 @@ class Post_Anonymously_Public_Render_Activity_Comments {
 		) {
 
 			$activity = $this->_functions->get_activity();
-			if ( empty( $this->_functions->show_anonymously_users( $activity->user_id, $activity->item_id ) ) ) {
+			if ( empty( $this->_functions->show_groups_anonymously_users( $activity->user_id, $activity->item_id ) ) ) {
 				/**
 				 * For User Link on the Avatar
 				 */
@@ -164,7 +184,7 @@ class Post_Anonymously_Public_Render_Activity_Comments {
 	public function activity_comment_name( $name ) {
 		
 		$activity = $this->_functions->get_activity();
-		if ( $this->_functions->show_anonymously_users( $activity->user_id, $activity->item_id ) ) {
+		if ( $this->_functions->show_groups_anonymously_users( $activity->user_id, $activity->item_id ) ) {
 			$name .= $this->_functions->anonymous_author_user_commnet_label();
 		} else {
 			$name = $this->_functions->anonymous_user_label();

@@ -87,31 +87,62 @@ class Post_Anonymously_Public {
 		 * side of the site.
 		 */
 		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/post-anonymously-public-common.php';
+		
+		$this->load_groups_class();
 
+		$this->load_fourms_class();
+	}
+
+	/**
+	 * Load all the fields releated to Groups
+	 */
+	public function load_groups_class() {
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing save group and activity meta
 		 * side of the site.
 		 */
-		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/post-anonymously-public-save-meta.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/groups/post-anonymously-public-save-meta.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing for rendering activity
 		 * side of the site.
 		 */
-		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/post-anonymously-public-render-activity.php';
-
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/groups/post-anonymously-public-render-activity.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing for rendering activity comments
 		 * side of the site.
 		 */
-		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/post-anonymously-public-render-activity-comments.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/groups/post-anonymously-public-render-activity-comments.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing for rendering notifications
 		 * side of the site.
 		 */
-		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/post-anonymously-public-render-notifications.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/groups/post-anonymously-public-render-notifications.php';
+	}
+
+	/**
+	 * Load all the fields releated to Groups
+	 */
+	public function load_fourms_class() {
+
+		/**
+		 * The class responsible for defining all actions that occur in the public-facing save forums and activity meta
+		 * side of the site.
+		 */
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/forums/post-anonymously-public-save-meta.php';
+
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/forums/post-anonymously-public-render-topic.php';
+
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/forums/post-anonymously-public-render-reply.php';
+
+		/**
+		 * The class responsible for defining all actions that occur in the public-facing for rendering notifications
+		 * side of the site.
+		 */
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/forums/post-anonymously-public-render-notifications.php';
+		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/forums/post-anonymously-public-render-emails.php';
 	}
 
 	/**
@@ -126,13 +157,19 @@ class Post_Anonymously_Public {
 		 */
 		$this->load_class();
 
-		Post_Anonymously_Public_Save_Meta::instance()->hooks();
+		Post_Anonymously_Public_Save_Meta_Groups::instance( $plugin_name, $version )->hooks();
 
-		Post_Anonymously_Public_Render_Activity::instance()->hooks();
+		Post_Anonymously_Public_Render_Groups_Activity::instance( $plugin_name, $version )->hooks();
 
-		Post_Anonymously_Public_Render_Activity_Comments::instance()->hooks();
+		Post_Anonymously_Public_Render_Groups_Activity_Comments::instance( $plugin_name, $version )->hooks();
 
-		Post_Anonymously_Public_Render_Notifications::instance()->hooks();
+		Post_Anonymously_Public_Render_Groups_Notifications::instance( $plugin_name, $version )->hooks();
+
+		Post_Anonymously_Public_Save_Meta_Forums::instance( $plugin_name, $version )->hooks();
+		Post_Anonymously_Public_Render_Forums_Topic::instance( $plugin_name, $version )->hooks();
+		Post_Anonymously_Public_Render_Forums_Reply::instance( $plugin_name, $version )->hooks();
+		Post_Anonymously_Public_Render_Forums_Notifications::instance( $plugin_name, $version )->hooks();
+		Post_Anonymously_Public_Render_Forums_Emails::instance( $plugin_name, $version )->hooks();
 
 	}
 
@@ -154,8 +191,10 @@ class Post_Anonymously_Public {
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
+		wp_register_style( $this->plugin_name, POST_ANONYMOUSLY_PLUGIN_URL . 'build/css/frontend.css', $this->css_asset_file['dependencies'], $this->css_asset_file['version'], 'all' );
+
 		if ( bp_is_groups_component() ) {
-			wp_enqueue_style( $this->plugin_name, POST_ANONYMOUSLY_PLUGIN_URL . 'build/css/frontend.css', $this->css_asset_file['dependencies'], $this->css_asset_file['version'], 'all' );
+			wp_enqueue_style( $this->plugin_name );
 		}
 
 	}

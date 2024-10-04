@@ -12,12 +12,30 @@ defined( 'ABSPATH' ) || exit;
  * @subpackage Post_Anonymously/public
  * @author     AcrossWP <contact@acrosswp.com>
  */
-class Post_Anonymously_Public_Save_Meta {
+class Post_Anonymously_Public_Save_Meta_Groups {
+
+	/**
+	 * The ID of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $plugin_name    The ID of this plugin.
+	 */
+	private $plugin_name;
+
+	/**
+	 * The version of this plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 * @var      string    $version    The current version of this plugin.
+	 */
+	private $version;
 
     /**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_Public_Save_Meta
+	 * @var Post_Anonymously_Public_Save_Meta_Groups
 	 * @since 0.0.1
 	 */
 	protected static $_instance = null;
@@ -25,7 +43,7 @@ class Post_Anonymously_Public_Save_Meta {
 	/**
 	 * The single instance of the class.
 	 *
-	 * @var Post_Anonymously_Public_Render_Activity
+	 * @var Post_Anonymously_Public_Common
 	 * @since 0.0.1
 	 */
 	protected $_functions = null;
@@ -37,9 +55,11 @@ class Post_Anonymously_Public_Save_Meta {
 	 * @param      string    $plugin_name       The name of the plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct() {
+	public function __construct( $plugin_name, $version ) {
 
-		$this->_functions = Post_Anonymously_Public_Common::instance();
+		$this->plugin_name = $plugin_name;
+		$this->version = $version;
+		$this->_functions = Post_Anonymously_Public_Common::instance( $plugin_name, $version );
 	}
 
     /**
@@ -52,9 +72,9 @@ class Post_Anonymously_Public_Save_Meta {
 	 * @see Post_Anonymously()
 	 * @return Post_Anonymously - Main instance.
 	 */
-	public static function instance() {
+	public static function instance( $plugin_name, $version ) {
 		if ( is_null( self::$_instance ) ) {
-			self::$_instance = new self();
+			self::$_instance = new self( $plugin_name, $version );
 		}
 		return self::$_instance;
 	}
@@ -94,7 +114,7 @@ class Post_Anonymously_Public_Save_Meta {
 			! empty( $comment_id ) 
 			&& ! empty( $activity->id )  
 			&& $this->_functions->is_anonymously_activity( $activity->id ) 
-			&& $this->_functions->login_user_is_activity_author( $activity->user_id )
+			&& $this->_functions->login_user_is_author( $activity->user_id )
 		) {
 			/**
 			 * Save this in the meta
