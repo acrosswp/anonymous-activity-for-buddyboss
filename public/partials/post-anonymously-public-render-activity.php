@@ -80,6 +80,33 @@ class Post_Anonymously_Public_Render_Activity {
 		 * Hook to add filter so that the normal user can not see the Post author data
 		 */
 		add_filter( 'bp_groups_format_activity_action_activity_update', array( $this, 'group_activity_update' ), 1000, 2 );
+
+
+		/**
+		 * Update comment edit data so when reply to the hidden comment usename is not show
+		 */
+		add_filter( 'bb_activity_comment_get_edit_data', array( $this, 'comment_get_edit_data' ), 1000 );
+
+	}
+
+	/**
+	 * Updage the edit comment
+	 */
+	public function comment_get_edit_data( $edit_data ) {
+
+		if ( ! isset( $edit_data['id'] ) ) {
+			return $edit_data;
+		}
+
+		if ( ! $this->_functions->is_anonymously_activity( $edit_data['id'] ) ) {
+			return $edit_data;
+		}
+
+		$edit_data['content'] = '';
+		$edit_data['user_id'] = '';
+		$edit_data['nickname'] = '';
+
+		return $edit_data;
 	}
 
 	/**
@@ -192,6 +219,5 @@ class Post_Anonymously_Public_Render_Activity {
 
 		return $action;
 	}
-
 }
 
