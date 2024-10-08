@@ -142,7 +142,7 @@ class Post_Anonymously_Public {
 		 * side of the site.
 		 */
 		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/forums/post-anonymously-public-render-notifications.php';
-		require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/forums/post-anonymously-public-render-emails.php';
+		// require_once POST_ANONYMOUSLY_PLUGIN_PATH . 'public/partials/forums/post-anonymously-public-render-emails.php';
 	}
 
 	/**
@@ -157,19 +157,19 @@ class Post_Anonymously_Public {
 		 */
 		$this->load_class();
 
-		Post_Anonymously_Public_Save_Meta_Groups::instance( $plugin_name, $version )->hooks();
+		Post_Anonymously_Public_Save_Meta_Groups::instance( $this->plugin_name, $this->version )->hooks();
 
-		Post_Anonymously_Public_Render_Groups_Activity::instance( $plugin_name, $version )->hooks();
+		Post_Anonymously_Public_Render_Groups_Activity::instance( $this->plugin_name, $this->version )->hooks();
 
-		Post_Anonymously_Public_Render_Groups_Activity_Comments::instance( $plugin_name, $version )->hooks();
+		Post_Anonymously_Public_Render_Groups_Activity_Comments::instance( $this->plugin_name, $this->version )->hooks();
 
-		Post_Anonymously_Public_Render_Groups_Notifications::instance( $plugin_name, $version )->hooks();
+		Post_Anonymously_Public_Render_Groups_Notifications::instance( $this->plugin_name, $this->version )->hooks();
 
-		Post_Anonymously_Public_Save_Meta_Forums::instance( $plugin_name, $version )->hooks();
-		Post_Anonymously_Public_Render_Forums_Topic::instance( $plugin_name, $version )->hooks();
-		Post_Anonymously_Public_Render_Forums_Reply::instance( $plugin_name, $version )->hooks();
-		Post_Anonymously_Public_Render_Forums_Notifications::instance( $plugin_name, $version )->hooks();
-		Post_Anonymously_Public_Render_Forums_Emails::instance( $plugin_name, $version )->hooks();
+		Post_Anonymously_Public_Save_Meta_Forums::instance( $this->plugin_name, $this->version )->hooks();
+		Post_Anonymously_Public_Render_Forums_Topic::instance( $this->plugin_name, $this->version )->hooks();
+		Post_Anonymously_Public_Render_Forums_Reply::instance( $this->plugin_name, $this->version )->hooks();
+		Post_Anonymously_Public_Render_Forums_Notifications::instance( $this->plugin_name, $this->version )->hooks();
+		// Post_Anonymously_Public_Render_Forums_Emails::instance( $this->plugin_name, $this->version )->hooks();
 
 	}
 

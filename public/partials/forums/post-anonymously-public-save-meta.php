@@ -100,6 +100,36 @@ class Post_Anonymously_Public_Save_Meta_Forums {
 		add_action( 'bbp_new_reply_post_extras', array( $this, 'reply_post_update' ), 1, 1 );
 		add_action( 'bbp_new_reply_pre_extras', array( $this, 'skip_reply_activity' ) );
 
+		/**
+		 * Stop email for the forums new activity of anonymou post.
+		 */
+		add_action( 'bp_send_email', array( $this, 'email_sending' ), 1000, 4 );
+
+	}
+
+	/**
+	 * Do not send email for the anonymou post in groups
+	 */
+	public function email_sending( $email, $email_type, $to, $args ) {
+
+		if ( 'groups-new-discussion' != $email_type ) {
+			return;
+		}
+
+		if ( ! isset( $args['tokens']['discussion.id'] ) ) {
+			return;
+		}
+
+		$discussion_id = $args['tokens']['discussion.id'];
+		if ( ! isset( $discussion_id ) ) {
+			return;
+		}
+
+		if ( ! $this->_functions->is_anonymously_post( $discussion_id )  ) {
+			return;
+		}
+
+		$email->set_to( '' );
 	}
 
 	/**

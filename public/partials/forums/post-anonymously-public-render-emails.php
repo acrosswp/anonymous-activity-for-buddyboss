@@ -104,7 +104,6 @@ class Post_Anonymously_Public_Render_Forums_Emails {
 		$author_id = get_post_field( 'post_author', $topic_id );
 		$receiver_user_id = $formatted_tokens['receiver-user.id'];
 
-
 		return $formatted_tokens;
 	}
 }
