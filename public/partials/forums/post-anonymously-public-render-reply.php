@@ -110,7 +110,7 @@ class Post_Anonymously_Public_Render_Forums_Reply {
 		if ( ! $this->_functions->is_anonymously_post( $post->ID ) ) {
 			return $default;
 		}
-			
+
 		return 'checked';
 	}
 

@@ -103,14 +103,41 @@ class Post_Anonymously_Public_Save_Meta_Forums {
 		/**
 		 * Stop email for the forums new activity of anonymou post.
 		 */
-		add_action( 'bp_send_email', array( $this, 'email_sending' ), 1000, 4 );
+		// add_action( 'bp_send_email', array( $this, 'discussion_email_sending' ), 1000, 4 );
+
+		// add_action( 'bp_send_email', array( $this, 'reply_email_sending' ), 1000, 4 );
 
 	}
 
 	/**
 	 * Do not send email for the anonymou post in groups
 	 */
-	public function email_sending( $email, $email_type, $to, $args ) {
+	public function discussion_email_sending( $email, $email_type, $to, $args ) {
+
+		if ( 'groups-new-discussion' != $email_type ) {
+			return;
+		}
+
+		if ( ! isset( $args['tokens']['discussion.id'] ) ) {
+			return;
+		}
+
+		$discussion_id = $args['tokens']['discussion.id'];
+		if ( ! isset( $discussion_id ) ) {
+			return;
+		}
+
+		if ( ! $this->_functions->is_anonymously_post( $discussion_id )  ) {
+			return;
+		}
+
+		$email->set_to( '' );
+	}
+
+	/**
+	 * Do not send email for the anonymou post in groups
+	 */
+	public function reply_email_sending( $email, $email_type, $to, $args ) {
 
 		if ( 'groups-new-discussion' != $email_type ) {
 			return;
@@ -208,10 +235,10 @@ class Post_Anonymously_Public_Save_Meta_Forums {
 		} else {
 			update_post_meta( $reply_id, 'anonymously-post', 0 );
 		}
-		
+
 		$topic_id = wp_get_post_parent_id( $reply_id );
 		$forum_id = wp_get_post_parent_id( $topic_id );
-		
+
 		update_post_meta( $reply_id, 'anonymously-post-topic-id', $topic_id );
 		update_post_meta( $reply_id, 'anonymously-post-forum-id', $forum_id );
 	}
