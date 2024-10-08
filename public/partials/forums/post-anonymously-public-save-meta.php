@@ -85,7 +85,7 @@ class Post_Anonymously_Public_Save_Meta_Forums {
 	 */
 	public function hooks() {
 
-		add_action( 'bbp_theme_before_topic_form_submit_wrapper', array( $this, 'show_button_on_topic' ) );
+		// add_action( 'bbp_theme_before_topic_form_submit_wrapper', array( $this, 'show_button_on_topic' ) );
 		add_action( 'bbp_theme_before_reply_form_submit_wrapper', array( $this, 'show_button_on_reply' ) );
 
 		/**
