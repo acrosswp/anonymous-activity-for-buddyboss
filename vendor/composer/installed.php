@@ -3,7 +3,7 @@
         'name' => 'acrosswp/post-anonymously',
         'pretty_version' => 'dev-main',
         'version' => 'dev-main',
-        'reference' => '2f65594abe299f8cfd379dc8db00bb1a3fd0f924',
+        'reference' => 'afcdb74780084f28e45a72c308d075f97a00e39e',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -13,7 +13,7 @@
         'acrosswp/post-anonymously' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '2f65594abe299f8cfd379dc8db00bb1a3fd0f924',
+            'reference' => 'afcdb74780084f28e45a72c308d075f97a00e39e',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -22,7 +22,7 @@
         'wpboilerplate/wpb-buddyboss-dependency' => array(
             'pretty_version' => 'dev-main',
             'version' => 'dev-main',
-            'reference' => '0d2b04e3fc111f14a4bd7aba3d6f7bdab5c4f6df',
+            'reference' => '91d6b3bb1f7c6a945c00aeaa06c4dadee70ae1dd',
             'type' => 'library',
             'install_path' => __DIR__ . '/../wpboilerplate/wpb-buddyboss-dependency',
             'aliases' => array(
@@ -55,7 +55,7 @@
         'yahnis-elsts/plugin-update-checker' => array(
             'pretty_version' => 'dev-master',
             'version' => 'dev-master',
-            'reference' => 'dfc396c0110fa1739dd4e349a1889d587ac21644',
+            'reference' => '73e6281e434bceffa7884568611804f8c38e27b5',
             'type' => 'library',
             'install_path' => __DIR__ . '/../yahnis-elsts/plugin-update-checker',
             'aliases' => array(

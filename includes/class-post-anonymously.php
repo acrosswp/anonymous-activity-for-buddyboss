@@ -210,7 +210,7 @@ final class Post_Anonymously {
 		 * For Plugin to check if BuddyBoss Platform plugin is active or not
 		 */
 		if ( class_exists( 'WPBoilerplate_BuddyBoss_Platform_Dependency' ) ) {
-			new WPBoilerplate_BuddyBoss_Platform_Dependency( POST_ANONYMOUSLY_PLUGIN_NAME_SLUG, POST_ANONYMOUSLY_FILES );
+			new WPBoilerplate_BuddyBoss_Platform_Dependency( $this->get_plugin_name(), POST_ANONYMOUSLY_FILES, array( 'activity' ) );
 		}
 
 		/**
@@ -223,7 +223,7 @@ final class Post_Anonymously {
 				'file_path' 		=> POST_ANONYMOUSLY_FILES,
 				'name_slug'			=> POST_ANONYMOUSLY_PLUGIN_NAME_SLUG,
 				'release_branch' 	=> 'main',
-				'release-assets' 	=> true
+				'release-assets' 	=> false
 			);
 
 			new WPBoilerplate_Updater_Checker_Github( $package );
