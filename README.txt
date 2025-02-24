@@ -55,6 +55,19 @@ Example 2:
 
 == Changelog ==
 
+= 0.0.12 =
+* Fix button not showing with the latest version of BuddyBoss Platform
+
+= 0.0.11 =
+* Fix button not showing with the latest version of BuddyBoss Platform
+
+= 0.0.10 =
+* Fix button not showing with the latest version of BuddyBoss Platform
+
+= 0.0.9 =
+* Fix Github Issue 3
+* Fix button not showing with the latest version of BuddyBoss Platform
+
 = 0.0.8 =
 * Fix Github Issue 3
 * Fix button not showing with the latest version of BuddyBoss Platform

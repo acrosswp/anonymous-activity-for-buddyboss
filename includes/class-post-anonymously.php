@@ -223,7 +223,7 @@ final class Post_Anonymously {
 				'file_path' 		=> POST_ANONYMOUSLY_FILES,
 				'name_slug'			=> POST_ANONYMOUSLY_PLUGIN_NAME_SLUG,
 				'release_branch' 	=> 'main',
-				'release-assets' 	=> false
+				'release-assets' 	=> true
 			);
 
 			new WPBoilerplate_Updater_Checker_Github( $package );
