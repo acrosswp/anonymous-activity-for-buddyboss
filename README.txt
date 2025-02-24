@@ -4,7 +4,7 @@ Tags: post-anonymously,buddyboss,buddypress,buddyboss-platform,anonymously-post,
 Donate link: https://acrosswp.com/
 Requires at least: 6.0
 Tested up to: 6.3
-Stable tag: 0.0.11
+Stable tag: 0.0.12
 Requires PHP: 7.2
 License: GPLv3
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
