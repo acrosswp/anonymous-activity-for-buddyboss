@@ -14,26 +14,27 @@
     "url": "https://github.com/wpboilerplate/post-anonymously/issues"
   },
   "scripts": {
-		"build": "wp-scripts build",
-		"format": "wp-scripts format",
-		"lint:css": "wp-scripts lint-style",
-		"lint:js": "wp-scripts lint-js",
-		"packages-update": "wp-scripts packages-update",
-		"plugin-zip": "wp-scripts plugin-zip",
-		"start": "wp-scripts start"
-	},
-	"devDependencies": {
-		"@wordpress/scripts": "^26.5.0",
-		"copy-webpack-plugin": "^11.0.0",
-		"glob": "^10.2.6",
-		"mini-css-extract-plugin": "^2.7.6",
-		"path": "^0.12.7",
-		"webpack-fix-style-only-entries": "^0.6.1",
-		"webpack-remove-empty-scripts": "^1.0.3"
-	},
-	"dependencies": {
-		"@wordpress/icons": "^9.25.0"
-	},
+    "build": "wp-scripts build",
+    "build-production": "wp-scripts build",
+    "format": "wp-scripts format",
+    "lint:css": "wp-scripts lint-style",
+    "lint:js": "wp-scripts lint-js",
+    "packages-update": "wp-scripts packages-update",
+    "plugin-zip": "wp-scripts plugin-zip",
+    "start": "wp-scripts start"
+  },
+  "devDependencies": {
+    "@wordpress/scripts": "^30.11.0",
+    "copy-webpack-plugin": "^11.0.0",
+    "glob": "^10.2.6",
+    "mini-css-extract-plugin": "^2.7.6",
+    "path": "^0.12.7",
+    "webpack-fix-style-only-entries": "^0.6.1",
+    "webpack-remove-empty-scripts": "^1.0.3"
+  },
+  "dependencies": {
+    "@wordpress/icons": "^9.25.0"
+  },
   "keywords": [
     "post-anonymously"
   ]
