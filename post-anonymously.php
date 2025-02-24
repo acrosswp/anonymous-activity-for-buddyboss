@@ -16,7 +16,7 @@
  * Plugin Name:       Post Anonymously for BuddyBoss
  * Plugin URI:        https://acrosswp.com
  * Description:       Post Anonymously in Activity Areas of BuddyBoss Platform
- * Version:           0.0.13
+ * Version:           0.0.14
  * Author:            AcrossWP
  * Author URI:        https://acrosswp.com
  * License:           GPL-2.0+
@@ -35,7 +35,7 @@ if ( ! defined( 'WPINC' ) ) {
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'POST_ANONYMOUSLY_FILES', __FILE__ );
+define( 'POST_ANONYMOUSLY_PLUGIN_FILES', __FILE__ );
 
 /**
  * The code that runs during plugin activation.

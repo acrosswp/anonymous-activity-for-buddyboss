@@ -129,10 +129,10 @@ final class Post_Anonymously {
 	 */
 	private function define_constants() {
 
-		$this->define( 'POST_ANONYMOUSLY_PLUGIN_FILE', POST_ANONYMOUSLY_FILES );
-		$this->define( 'POST_ANONYMOUSLY_PLUGIN_BASENAME', plugin_basename( POST_ANONYMOUSLY_FILES ) );
-		$this->define( 'POST_ANONYMOUSLY_PLUGIN_PATH', plugin_dir_path( POST_ANONYMOUSLY_FILES ) );
-		$this->define( 'POST_ANONYMOUSLY_PLUGIN_URL', plugin_dir_url( POST_ANONYMOUSLY_FILES ) );
+		$this->define( 'POST_ANONYMOUSLY_PLUGIN_FILE', POST_ANONYMOUSLY_PLUGIN_FILES );
+		$this->define( 'POST_ANONYMOUSLY_PLUGIN_BASENAME', plugin_basename( POST_ANONYMOUSLY_PLUGIN_FILES ) );
+		$this->define( 'POST_ANONYMOUSLY_PLUGIN_PATH', plugin_dir_path( POST_ANONYMOUSLY_PLUGIN_FILES ) );
+		$this->define( 'POST_ANONYMOUSLY_PLUGIN_URL', plugin_dir_url( POST_ANONYMOUSLY_PLUGIN_FILES ) );
 		$this->define( 'POST_ANONYMOUSLY_PLUGIN_NAME_SLUG', $this->plugin_name );
 		$this->define( 'POST_ANONYMOUSLY_PLUGIN_NAME', 'Post Anonymously' );
 
@@ -210,7 +210,7 @@ final class Post_Anonymously {
 		 * For Plugin to check if BuddyBoss Platform plugin is active or not
 		 */
 		if ( class_exists( 'WPBoilerplate_BuddyBoss_Platform_Dependency' ) ) {
-			new WPBoilerplate_BuddyBoss_Platform_Dependency( $this->get_plugin_name(), POST_ANONYMOUSLY_FILES, array( 'activity' ) );
+			new WPBoilerplate_BuddyBoss_Platform_Dependency( $this->get_plugin_name(), POST_ANONYMOUSLY_PLUGIN_FILES, array( 'activity' ) );
 		}
 
 		/**
@@ -220,10 +220,10 @@ final class Post_Anonymously {
 
 			$package = array(
 				'repo' 		        => 'https://github.com/acrosswp/post-anonymously',
-				'file_path' 		=> POST_ANONYMOUSLY_FILES,
+				'file_path' 		=> POST_ANONYMOUSLY_PLUGIN_FILE,
 				'name_slug'			=> POST_ANONYMOUSLY_PLUGIN_NAME_SLUG,
 				'release_branch' 	=> 'main',
-				'release-assets' 	=> true
+				'release-assets' 	=> false
 			);
 
 			new WPBoilerplate_Updater_Checker_Github( $package );

@@ -46,7 +46,7 @@ inside the `define_public_hooks` method of your plugin
  * Add the dependency for the call
  */
     if ( class_exists( 'WPBoilerplate_BuddyPress_BuddyBoss_Platform_Dependency' ) ) {
-        new WPBoilerplate_BuddyPress_BuddyBoss_Platform_Dependency( $this->get_plugin_name(), POST_ANONYMOUSLY_FILES );
+        new WPBoilerplate_BuddyPress_BuddyBoss_Platform_Dependency( $this->get_plugin_name(), POST_ANONYMOUSLY_PLUGIN_FILES );
     }
 ```
 
